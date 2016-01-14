@@ -1,0 +1,18 @@
+.idea/
+
+# app defauls
+/node_modules/
+/vendor/
+Homestead.yaml
+Homestead.json
+.env
+
+
+/public/js
+/public/fonts
+/public/css
+/public/build
+
+# ide-helper
+/.phpstorm.meta.php
+/_ide_helper.php
