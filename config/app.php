@@ -159,9 +159,10 @@ return [
         /*
         * Vendors
         */
+        Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
     ],
 
     /*
@@ -214,5 +215,6 @@ return [
         'Flash'     => Laracasts\Flash\Flash::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'PDF'       => Barryvdh\DomPDF\Facade::class,
     ],
 ];

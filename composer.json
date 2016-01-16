@@ -15,6 +15,7 @@
     "laravel/framework": "5.2.*",
     "laravelcollective/html": "5.2.*",
     "barryvdh/laravel-ide-helper": "^2.1",
+    "barryvdh/laravel-dompdf": "0.6.*",
     "doctrine/dbal": "^2.5",
     "laracasts/flash": "^1.3"
   },
