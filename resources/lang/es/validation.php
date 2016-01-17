@@ -1,5 +1,6 @@
 <?php
 return [
+    "captcha"              => "Parece ser que ha ingresado el código de :attribute errado. Entre el código correspondiente de la imagen.",
     "accepted"             => "El campo :attribute debe ser aceptado.",
     "active_url"           => "El campo :attribute no es una URL valida.",
     "after"                => "El campo :attribute debe ser una fecha después de campo :date.",

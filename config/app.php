@@ -164,6 +164,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -218,5 +219,6 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Date'      => Jenssegers\Date\Date::class,
+        'Captcha'   => Mews\Captcha\Facades\Captcha::class,
     ],
 ];
