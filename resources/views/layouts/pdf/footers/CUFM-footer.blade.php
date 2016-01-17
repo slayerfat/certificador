@@ -1,0 +1,1 @@
+<div class="footer">Caracas, {{ Date::now()->format('l j F') }} de {{ Date::now()->format('Y') }}</div>

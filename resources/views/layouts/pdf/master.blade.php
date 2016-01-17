@@ -30,10 +30,6 @@ Alejandro Granadillo slayerfat@gmail.com.
   <link rel="stylesheet" href="{{ asset('css/pdf.css') }}">
 </head>
 <body>
-@include('layouts.pdf.header')
-
 @yield('content')
-
-@include('layouts.pdf.footer')
 </body>
 </html>
