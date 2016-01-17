@@ -1,7 +1,9 @@
 <?php
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
 });
 
 Route::get('/pdf', function () {
@@ -19,4 +21,6 @@ Route::get('/view', function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
+
+    Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 });
