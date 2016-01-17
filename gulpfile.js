@@ -9,6 +9,7 @@ var paths = {
 
 elixir(function (mix) {
     mix.sass('app.sass')
+        .sass('pdf.sass')
         .copy(paths.bootstrap + 'fonts/bootstrap/**', paths.public + '/fonts')
         .copy(paths.fontAwesome + 'fonts/**', paths.public + '/fonts')
         .copy(paths.bootstrap + 'fonts/bootstrap/**', paths.public + '/build/fonts')
@@ -17,7 +18,11 @@ elixir(function (mix) {
             paths.jQuery + "dist/jquery.js",
             paths.bootstrap + "javascripts/bootstrap.js"
         ])
-        .version(['css/app.css', 'js/all.js'])
+        .version([
+            'css/app.css',
+            'css/pdf.css',
+            'js/all.js'
+        ])
         .browserSync({
             proxy: 'jornadas.app'
         });

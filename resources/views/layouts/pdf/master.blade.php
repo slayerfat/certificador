@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
 <!--
 ░░░░░░░░░▄░░░░░░░░░░░░░░▄░░░░
 ░░░░░░░░▌▒█░░░░░░░░░░░▄▀▒▌░░░
@@ -24,32 +25,11 @@ Google hire me:
 twitter: @slayerfat
 Alejandro Granadillo slayerfat@gmail.com.
 -->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="author" content="Alejandro Granadillo">
-
-  <title>Mini-app Jornadas</title>
-
-  <!-- Styles -->
-  <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
-
-  <style>
-    .fa-btn {
-      margin-right: 6px;
-    }
-  </style>
+  <link rel="stylesheet" href="{{ asset('css/pdf.css') }}">
 </head>
-<body id="app-layout">
-@include('layouts.navbar')
-
-<div class="container">
-  @include('flash::message')
-</div>
-
+<body>
 @yield('content')
-
-<script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>
