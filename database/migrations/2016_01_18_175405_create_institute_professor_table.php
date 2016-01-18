@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEventsTable extends Migration
+class CreateInstituteProfessorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,12 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('institute_professor', function (Blueprint $table) {
             $table->unsignedInteger('institute_id')->nullable();
             $table->foreign('institute_id')->references('id')->on('institutes');
-            $table->string('name');
-            $table->unsignedInteger('hours');
-            $table->text('content');
-            $table->date('date');
-            $table->timestamps();
+            $table->unsignedInteger('professor_id')->nullable();
+            $table->foreign('professor_id')->references('id')->on('professors');
+            $table->boolean('leads')->default(false);
         });
     }
 
@@ -31,6 +28,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::drop('institute_professor');
     }
 }

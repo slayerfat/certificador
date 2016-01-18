@@ -13,7 +13,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'admin',
     ];
 
     /**
@@ -22,6 +25,32 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'admin'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function personalDetails()
+    {
+        return $this->hasOne(PersonalDetail::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }
