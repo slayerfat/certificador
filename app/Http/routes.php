@@ -23,4 +23,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::auth();
 
     Route::get('/home', ['as' => 'home.index', 'uses' => 'HomeController@index']);
+    Route::get('/profesores',
+        ['as' => 'professors.index', 'uses' => 'ProfessorsController@index']);
 });

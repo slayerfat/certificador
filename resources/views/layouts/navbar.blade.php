@@ -23,6 +23,28 @@
         <li><a href="{{ url('/home') }}">Inicio</a></li>
       </ul>
 
+      <!-- Mant -->
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle"
+             data-toggle="dropdown" role="button"
+             aria-expanded="false">
+            <i class="fa fa-btn fa-wrench"></i> Mantenimiento <span
+              class="caret"></span>
+          </a>
+
+          <!-- Listado -->
+          <ul class="dropdown-menu" role="menu">
+            <!-- Profesores -->
+            <li>
+              <a href="{{ route('professors.index') }}">
+                <i class="fa fa-btn fa-user-md"></i>Profesores
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
       <!-- Right Side Of Navbar -->
       <ul class="nav navbar-nav navbar-right">
         <!-- Authentication Links -->
