@@ -65,7 +65,7 @@
       "php artisan optimize"
     ],
     "ide-models": [
-      "php artisan ide-helper:models Post --write"
+      "php artisan ide-helper:models --write"
     ]
   },
   "config": {

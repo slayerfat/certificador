@@ -4,6 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\PersonalDetail
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $first_surname
+ * @property string $last_surname
+ * @property integer $ci
+ * @property string $phone
+ * @property string $cellphone
+ * @property \Carbon\Carbon $birthday
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \App\User $user
+ * @property-read \App\Professor $professor
+ */
 class PersonalDetail extends Model
 {
     /**
