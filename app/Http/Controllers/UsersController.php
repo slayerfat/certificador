@@ -72,7 +72,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id)->firstOrFail();
+
+        return View::make('users.forms.edit', compact('user'));
     }
 
     /**

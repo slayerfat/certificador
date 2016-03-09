@@ -3,7 +3,13 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <code>{{ $user }}</code>
+      @if (Auth::user()->admin)
+        @include('layouts.admins.edit-delete-buttons', [
+          'resource' => 'users',
+          'id' => $user->id
+        ])
+      @endif
+
       {{-- user info --}}
       <h1>
         {{$user->name}}
@@ -15,7 +21,15 @@
       </h1>
 
       @if ($user->personalDetails)
+        <hr>
+
+        <h2>
+          Fecha de nacimiento:
+          {{ Date::now()->format('l j F \d\e Y') }}
+        </h2>
+
         <h1>C.I. {{ $user->personalDetails->ci }}</h1>
+
         <h2>
           {{$user->personalDetails->formattedNames(true)}}
         </h2>
@@ -29,6 +43,10 @@
 
           {{$phoneParser->parseNumber($user->personalDetails->cellphone)}}
         </h3>
+
+        <a href="{{ route("users.edit", $user->personalDetails->id) }}" class="btn btn-default">
+          <i class="fa fa-btn fa-edit"></i>Editar Información Personal
+        </a>
       @endif
 
       @include('layouts.admins.basic-audit', ['model' => $user])

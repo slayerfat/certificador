@@ -42,4 +42,16 @@ Route::group(['middleware' => ['web']], function () {
         '/usuarios/{id}',
         ['as' => 'users.show', 'uses' => 'UsersController@show']
     );
+    Route::get(
+        '/usuarios/{id}/edit',
+        ['as' => 'users.edit', 'uses' => 'UsersController@edit']
+    );
+    Route::patch(
+        '/usuarios/{id}',
+        ['as' => 'users.store', 'uses' => 'UsersController@update']
+    );
+    Route::delete(
+        '/usuarios/{id}',
+        ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']
+    );
 });
