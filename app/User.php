@@ -19,6 +19,16 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property integer $personal_details_id
  * @property-read \App\PersonalDetail $personalDetails
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Event[] $events
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereAdmin($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User wherePersonalDetailsId($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {

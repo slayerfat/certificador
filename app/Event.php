@@ -17,6 +17,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Institute $institute
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereInstituteId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereHours($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereContent($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereDate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Event extends Model
 {

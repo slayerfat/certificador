@@ -16,6 +16,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\PersonalDetail $personalDetails
  * @property-read \App\Title $title
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Institute[] $institutes
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePersonalDetailsId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor whereTitleId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePosition($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Professor extends Model
 {

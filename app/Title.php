@@ -12,6 +12,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Professor[] $professor
+ * @method static \Illuminate\Database\Query\Builder|\App\Title whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Title whereDesc($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Title whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Title whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Title extends Model
 {

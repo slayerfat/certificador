@@ -21,6 +21,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
  * @property-read \App\Professor $professor
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereFirstName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereLastName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereFirstSurname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereLastSurname($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereCi($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail wherePhone($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereCellphone($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereBirthday($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class PersonalDetail extends Model
 {
