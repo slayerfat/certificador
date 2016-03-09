@@ -62,7 +62,16 @@
             </a>
 
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Salir</a>
+              <li>
+                <a href="{{ route('users.show', Auth::user()->name) }}">
+                  <i class="fa fa-btn fa-eye"></i>
+                  Ver perfil
+                </a>
+              <li>
+                <a href="{{ url('/logout') }}">
+                  <i class="fa fa-btn fa-sign-out"></i>
+                  Salir
+                </a>
               </li>
             </ul>
           </li>
