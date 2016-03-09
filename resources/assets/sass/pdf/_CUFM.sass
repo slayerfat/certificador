@@ -16,15 +16,38 @@
     background-color: #dedede
     height: 20px
 
+.pdf-body
+  background: no-repeat center
+
 .pdf-user
+  font-weight: bold
+  text-align: center
+
+  // determina el tamaño minimo del elemento
+  // dentro del pdf para que no haga clipping
   height: 300px
 
-  .details
-    @include make-xs-column(8)
+  .pre
+    font-weight: normal
 
-  .info
-    @include make-xs-column(4)
-    text-align: center
+  .details
+    @include make-xs-column(12)
+
+.pdf-event
+  text-align: center
+
+  // determina el tamaño minimo del elemento
+  // dentro del pdf para que no haga clipping
+  height: 300px
+
+  .pre
+    font-weight: normal
+
+  .name
+    font-weight: bold
+
+  .details
+    @include make-xs-column(12)
 
 .pdf-authorities
   .group
@@ -38,10 +61,16 @@
 .footer
   text-align: center
 
-.details
+#details
   @include make-xs-column(12)
+  font-family: $font-family-base
+
   .title
     text-align: center
 
   .info
+    font-size: $font-size-h4
     text-align: center
+
+  .bold
+    font-weight: bold

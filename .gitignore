@@ -13,6 +13,7 @@ Homestead.json
 /public/fonts
 /public/css
 /public/build
+/public/images
 
 # ide-helper
 /.phpstorm.meta.php

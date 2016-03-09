@@ -1,13 +1,13 @@
-<div class="details">
+<div id="details">
   <div class="info">
-    <h1>
+    <p>
       JORNADA
       <br>
       @{{ TITULO DE JORNADA TAL }}
 
       <br>
       Alianza CUFM - ISACA
-    </h1>
+    </p>
 
     <h3>
       Registro del Certificado
