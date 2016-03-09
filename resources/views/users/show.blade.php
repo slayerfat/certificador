@@ -14,6 +14,23 @@
         </small>
       </h1>
 
+      @if ($user->personalDetails)
+        <h1>C.I. {{ $user->personalDetails->ci }}</h1>
+        <h2>
+          {{$user->personalDetails->formattedNames(true)}}
+        </h2>
+
+        <h3>
+          Teléfonos: <br/>
+
+          {{$phoneParser->parseNumber($user->personalDetails->phone)}}
+
+          <br/>
+
+          {{$phoneParser->parseNumber($user->personalDetails->cellphone)}}
+        </h3>
+      @endif
+
       @include('layouts.admins.basic-audit', ['model' => $user])
     </div>
   </div>

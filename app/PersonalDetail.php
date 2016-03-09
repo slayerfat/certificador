@@ -59,7 +59,7 @@ class PersonalDetail extends Model
      * @var array
      */
     protected $dates = [
-        'birthday'
+        'birthday',
     ];
 
     /**
@@ -76,5 +76,46 @@ class PersonalDetail extends Model
     public function professor()
     {
         return $this->hasOne(Professor::class);
+    }
+
+    /**
+     * Genera los nombres en formato legible para
+     * ser consumido por alguna vista.
+     *
+     * @param boolean $everything chequea si se trae los nombres secundarios.
+     * @return string
+     */
+    public function formattedNames($everything = null)
+    {
+        $firstName = ucfirst($this->attributes['first_name']);
+        $firstSurname = ucfirst($this->attributes['first_surname']);
+
+        // si everything no es nulo entonces
+        // se desea los nombres y apellidos.
+        if (is_null($everything)) {
+            return "{$firstSurname}, {$firstName}";
+        }
+
+        return $this->formattedNamesWithLast($firstSurname, $firstName);
+    }
+
+    /**
+     * Genera los nombres en formato legible con los nombres y apellidos.
+     *
+     * @param string $firstSurname El primer apellido.
+     * @param string $firstName El primer nombre.
+     * @return string los apellidos, nombres.
+     */
+    private function formattedNamesWithLast($firstSurname, $firstName)
+    {
+        $lastName = isset($this->attributes['last_name']) ?
+            ucfirst($this->attributes['last_name']) : '';
+        $lastSurName = isset($this->attributes['last_surname']) ?
+            ucfirst($this->attributes['last_surname']) : '';
+
+        $surnames = trim("{$firstSurname} {$lastSurName}");
+        $names = trim("{$firstName} {$lastName}");
+
+        return "{$surnames}, {$names}";
     }
 }

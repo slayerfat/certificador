@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\User;
 use Illuminate\Http\Request;
+use Slayerfat\PhoneParser\Interfaces\PhoneParserInterface;
 use View;
 
 class UsersController extends Controller
@@ -53,13 +54,14 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
+     * @param PhoneParserInterface $phoneParser
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, PhoneParserInterface $phoneParser)
     {
         $user = User::whereName($id)->firstOrFail()->load('personalDetails');
 
-        return View::make('users.show', compact('user'));
+        return View::make('users.show', compact('user', 'phoneParser'));
     }
 
     /**
