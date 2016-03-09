@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
         $user->name = env('USER_NAME');
         $user->email = env('USER_EMAIL');
         $user->password = bcrypt(env('USER_PW'));
+        $user->admin = true;
 
         $user->save();
     }
