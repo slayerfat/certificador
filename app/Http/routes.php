@@ -48,7 +48,7 @@ Route::group(['middleware' => ['web']], function () {
     );
     Route::patch(
         '/usuarios/{id}',
-        ['as' => 'users.store', 'uses' => 'UsersController@update']
+        ['as' => 'users.update', 'uses' => 'UsersController@update']
     );
     Route::delete(
         '/usuarios/{id}',

@@ -7,10 +7,12 @@
         <div class="panel panel-default">
           <div class="panel-heading">Actualizar Usuario</div>
           <div class="panel-body">
+            @include('errors.bag')
             {!! Form::model(
               $user,
               [
-                'route' => ['users.edit', $user->id],
+                'route' => ['users.update', $user->id],
+                'method' => 'patch',
                 'class'  => 'form-horizontal',
               ]
             ) !!}

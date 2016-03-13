@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\UserRequest;
 use App\User;
+use Flash;
 use Illuminate\Http\Request;
+use Redirect;
 use Slayerfat\PhoneParser\Interfaces\PhoneParserInterface;
 use View;
 
@@ -72,7 +75,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id)->firstOrFail();
+        $user = User::findOrFail($id);
 
         return View::make('users.forms.edit', compact('user'));
     }
@@ -80,13 +83,27 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\UserRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        /** @var User $user */
+        $user = User::findOrFail($id);
+
+        if (!empty($request->input('password'))) {
+            $user->password = bcrypt($request->input('password'));
+        }
+
+        $user->name  = $request->input('name');
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        Flash::success('Usuario actualizado correctamente.');
+
+        return Redirect::route('users.show', $user->name);
     }
 
     /**
