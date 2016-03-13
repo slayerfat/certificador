@@ -60,7 +60,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'admin'
+        'admin',
     ];
 
     /**
@@ -77,5 +77,36 @@ class User extends Authenticatable
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    /**
+     * helper para ver si es admin o si puede manipular algun recurso.
+     *
+     * @param int $id el foreign key del recurso.
+     * @return boolean
+     */
+    public function isOwnerOrAdmin($id)
+    {
+        return boolval($this->attributes['admin']) || $this->isOwner($id);
+    }
+
+    /**
+     * chequea si el id del foreign key del recurso es igual al id del usuario,
+     * en otras palabras, verifica que el usuario pueda modificar
+     * algun recurso viendo si le pertenece o no.
+     *
+     * @param int $id el foreign key del recurso.
+     * @return boolean
+     */
+    public function isOwner($id)
+    {
+        if (is_null($id)) {
+            return false;
+        }
+        if (isset($this->attributes['id'])) {
+            return $this->attributes['id'] == $id;
+        }
+
+        return false;
     }
 }
