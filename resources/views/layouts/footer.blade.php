@@ -5,7 +5,7 @@
 
   <p class="footer-centered-text footer-authors">
     <i class="fa fa-twitter"></i><a
-      href="https://github.com/slayerfat">@slayerfat</a>
+      href="https://twitter.com/slayerfat">@slayerfat</a>
   </p>
 
   <p class="footer-centered-text footer-authors">
