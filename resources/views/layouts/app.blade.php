@@ -50,6 +50,8 @@ Alejandro Granadillo slayerfat@gmail.com.
 
 @yield('content')
 
+@include('layouts.footer')
+
 <script src="{{ elixir('js/all.js') }}"></script>
 </body>
 </html>
