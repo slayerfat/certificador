@@ -44,9 +44,12 @@
           {{$phoneParser->parseNumber($user->personalDetails->cellphone)}}
         </h3>
 
-        <a href="{{ route("users.edit", $user->personalDetails->id) }}" class="btn btn-default">
-          <i class="fa fa-btn fa-edit"></i>Editar Información Personal
-        </a>
+          @can('update', $user)
+          <a href="{{ route("users.edit", $user->personalDetails->id) }}"
+             class="btn btn-default">
+            <i class="fa fa-btn fa-edit"></i>Editar Información Personal
+          </a>
+          @endcan
       @endif
 
       @include('layouts.admins.basic-audit', ['model' => $user])
