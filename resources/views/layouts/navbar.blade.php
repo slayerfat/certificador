@@ -36,6 +36,13 @@
 
             <!-- Listado -->
             <ul class="dropdown-menu" role="menu">
+              <!-- Usuarios -->
+              <li>
+                <a href="{{ route('users.index') }}">
+                  <i class="fa fa-btn fa-users"></i>Usuarios
+                </a>
+              </li>
+
               <!-- Profesores -->
               <li>
                 <a href="{{ route('professors.index') }}">

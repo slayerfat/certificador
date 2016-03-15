@@ -29,7 +29,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all()->load('personalDetails');
+
+        return View::make('users.index', compact('users'));
     }
 
     /**
