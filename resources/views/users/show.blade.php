@@ -52,6 +52,13 @@
           @endcan
       @endif
 
+        @unless ($user->personalDetails)
+          <a href="{{ route("users.create") }}"
+             class="btn btn-default">
+            <i class="fa fa-btn fa-edit"></i>Añadir Información Personal
+          </a>
+        @endunless
+
       @include('layouts.admins.basic-audit', ['model' => $user])
     </div>
   </div>

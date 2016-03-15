@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Flash;
-use Illuminate\Http\Request;
 use Redirect;
 use Slayerfat\PhoneParser\Interfaces\PhoneParserInterface;
 use View;
@@ -41,18 +40,26 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('users.forms.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\UserRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create([
+            'name'     => $request->input('name'),
+            'email'    => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        Flash::success('Usuario creado correctamente.');
+
+        return Redirect::route('users.show', $user->name);
     }
 
     /**
