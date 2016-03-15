@@ -14,7 +14,7 @@
   </p>
 
   <p class="text-center">
-    <a href="https://github.com/slayerfat/sistemaPCI"
+    <a href="https://github.com/slayerfat/jornadas-miniapp"
        data-toggle="tooltip"
        title="Ver código fuente"
     >

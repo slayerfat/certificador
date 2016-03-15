@@ -35,6 +35,9 @@ Alejandro Granadillo slayerfat@gmail.com.
   <!-- Styles -->
   <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
 
+  <!-- Yielded -->
+  @yield('css')
+
   <style>
     .fa-btn {
       margin-right: 6px;
@@ -53,5 +56,8 @@ Alejandro Granadillo slayerfat@gmail.com.
 @include('layouts.footer')
 
 <script src="{{ elixir('js/all.js') }}"></script>
+
+<!-- Yielded -->
+@yield('js')
 </body>
 </html>
