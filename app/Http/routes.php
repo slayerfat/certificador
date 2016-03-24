@@ -62,4 +62,22 @@ Route::group(['middleware' => ['web']], function () {
         '/usuarios/{id}',
         ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']
     );
+
+    // Personal Details
+    Route::get(
+        '/datos-personales/crear/{userID}',
+        ['as' => 'personalDetails.create', 'uses' => 'PersonalDetailsController@create']
+    );
+    Route::post(
+        '/datos-personales/{userID}',
+        ['as' => 'personalDetails.store', 'uses' => 'PersonalDetailsController@store']
+    );
+    Route::get(
+        '/datos-personales/{id}/edit',
+        ['as' => 'personalDetails.edit', 'uses' => 'PersonalDetailsController@edit']
+    );
+    Route::patch(
+        '/datos-personales/{id}',
+        ['as' => 'personalDetails.update', 'uses' => 'PersonalDetailsController@update']
+    );
 });

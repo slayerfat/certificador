@@ -8,6 +8,11 @@
           'resource' => 'users',
           'id' => $user->id
         ])
+        @if($user->personalDetails && !$user->personalDetails->professor)
+          <a href="{{ route('users.create') }}" class="btn btn-default">
+            Crear información Profesoral
+          </a>
+        @endif
       @endif
 
       {{-- user info --}}
@@ -53,7 +58,7 @@
       @endif
 
         @unless ($user->personalDetails)
-          <a href="{{ route("users.create") }}"
+          <a href="{{ route("personalDetails.create", $user->id) }}"
              class="btn btn-default">
             <i class="fa fa-btn fa-edit"></i>Añadir Información Personal
           </a>
