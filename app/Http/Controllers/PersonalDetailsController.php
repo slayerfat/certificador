@@ -7,7 +7,6 @@ use App\Http\Requests\PersonalDetailsRequest;
 use App\PersonalDetail;
 use App\User;
 use Flash;
-use Illuminate\Http\Request;
 use Redirect;
 use View;
 
@@ -68,34 +67,26 @@ class PersonalDetailsController extends Controller
      */
     public function edit($id)
     {
-//        $user = User::findOrFail($id);
-//
-//        return View::make('users.forms.edit', compact('user'));
+        $details = PersonalDetail::findOrFail($id);
+
+        return View::make('personalDetails.forms.edit', compact('details'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\PersonalDetailsRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PersonalDetailsRequest $request, $id)
     {
-        /** @var User $user */
-//        $user = User::findOrFail($id);
-//
-//        if (!empty($request->input('password'))) {
-//            $user->password = bcrypt($request->input('password'));
-//        }
-//
-//        $user->name  = $request->input('name');
-//        $user->email = $request->input('email');
-//
-//        $user->save();
-//
-//        Flash::success('Usuario actualizado correctamente.');
-//
-//        return Redirect::route('users.show', $user->name);
+        $details = PersonalDetail::findOrFail($id)->load('user');
+
+        $details->update($request->all());
+
+        Flash::success('Datos personales actualizados correctamente.');
+
+        return Redirect::route('users.show', $details->user->name);
     }
 }
