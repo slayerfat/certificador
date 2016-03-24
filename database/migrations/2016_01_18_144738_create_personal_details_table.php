@@ -28,8 +28,8 @@ class CreatePersonalDetailsTable extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('personal_details_id')->nullable();
-            $table->foreign('personal_details_id')->references('id')->on('personal_details');
+            $table->unsignedInteger('personal_detail_id')->nullable();
+            $table->foreign('personal_detail_id')->references('id')->on('personal_details');
         });
     }
 
@@ -41,8 +41,8 @@ class CreatePersonalDetailsTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_personal_details_id_foreign');
-            $table->dropColumn('personal_details_id');
+            $table->dropForeign('users_personal_detail_id_foreign');
+            $table->dropColumn('personal_detail_id');
         });
 
         Schema::drop('personal_details');
