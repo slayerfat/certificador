@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProfessorsTable extends Migration
 {
@@ -14,8 +14,8 @@ class CreateProfessorsTable extends Migration
     {
         Schema::create('professors', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('personal_details_id')->nullable();
-            $table->foreign('personal_details_id')->references('id')->on('personal_details');
+            $table->unsignedInteger('personal_detail_id')->nullable();
+            $table->foreign('personal_detail_id')->references('id')->on('personal_details');
             $table->unsignedInteger('title_id')->nullable();
             $table->foreign('title_id')->references('id')->on('titles');
             $table->string('position');
