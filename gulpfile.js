@@ -5,6 +5,7 @@ var paths = {
     'bootstrap': './node_modules/bootstrap-sass/assets/',
     'jQuery': './node_modules/jquery/',
     'fontAwesome': './node_modules/font-awesome/',
+    'datepicker': './node_modules/bootstrap-datepicker/',
     'bootTable': './node_modules/bootstrap-table/'
 };
 
@@ -16,6 +17,11 @@ elixir(function (mix) {
         .copy(paths.bootstrap + 'fonts/bootstrap/**', paths.public + '/build/fonts')
         .copy(paths.bootstrap + 'fonts/bootstrap/**', paths.public + '/build/fonts/bootstrap')
         .copy(paths.fontAwesome + 'fonts/**', paths.public + '/build/fonts')
+
+        // bootstrap-datepicker
+        .copy(paths.datepicker + 'dist/css/bootstrap-datepicker3.min.css', paths.public + '/css/')
+        .copy(paths.datepicker + 'dist/js/bootstrap-datepicker.min.js', paths.public + '/js/')
+        .copy(paths.datepicker + 'dist/locales/bootstrap-datepicker.es.min.js', paths.public + '/js/')
 
         // bootstrap-table
         .copy(paths.bootTable + 'src/bootstrap-table.css', paths.public + '/css/')
