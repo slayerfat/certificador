@@ -26,11 +26,6 @@ class CreatePersonalDetailsTable extends Migration
             $table->date('birthday');
             $table->timestamps();
         });
-
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedInteger('personal_detail_id')->nullable();
-            $table->foreign('personal_detail_id')->references('id')->on('personal_details');
-        });
     }
 
     /**
@@ -40,11 +35,6 @@ class CreatePersonalDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_personal_detail_id_foreign');
-            $table->dropColumn('personal_detail_id');
-        });
-
         Schema::drop('personal_details');
     }
 }

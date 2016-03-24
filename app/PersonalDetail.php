@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -73,11 +74,34 @@ class PersonalDetail extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     * Nos interesa guardar la fecha sin las horas y minutos.
+     *
+     * @param string $value la fecha a guardar
+     * @return Carbon
+     */
+    public function setBirthdayAttribute($value)
+    {
+        return $this->attributes['birthday'] =
+            Carbon::createFromFormat('Y-m-d', $value);
+    }
+
+    /**
+     * Nos interesa obtener la fecha sin las horas y minutos.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getBirthdayAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -97,7 +121,7 @@ class PersonalDetail extends Model
      */
     public function formattedNames($everything = null)
     {
-        $firstName = ucfirst($this->attributes['first_name']);
+        $firstName    = ucfirst($this->attributes['first_name']);
         $firstSurname = ucfirst($this->attributes['first_surname']);
 
         // si everything no es nulo entonces
@@ -118,13 +142,13 @@ class PersonalDetail extends Model
      */
     private function formattedNamesWithLast($firstSurname, $firstName)
     {
-        $lastName = isset($this->attributes['last_name']) ?
+        $lastName    = isset($this->attributes['last_name']) ?
             ucfirst($this->attributes['last_name']) : '';
         $lastSurName = isset($this->attributes['last_surname']) ?
             ucfirst($this->attributes['last_surname']) : '';
 
         $surnames = trim("{$firstSurname} {$lastSurName}");
-        $names = trim("{$firstName} {$lastName}");
+        $names    = trim("{$firstName} {$lastName}");
 
         return "{$surnames}, {$names}";
     }
