@@ -66,12 +66,15 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @param PhoneParserInterface $phoneParser
+     * @param \Slayerfat\PhoneParser\Interfaces\PhoneParserInterface $phoneParser
      * @return \Illuminate\Http\Response
      */
     public function show($id, PhoneParserInterface $phoneParser)
     {
-        $user = User::whereName($id)->firstOrFail()->load('personalDetails');
+        $user = User::whereName($id)
+            ->orWhere('id', $id)
+            ->firstOrFail()
+            ->load('personalDetails');
 
         return View::make('users.show', compact('user', 'phoneParser'));
     }
