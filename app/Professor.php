@@ -50,7 +50,7 @@ class Professor extends Model
      */
     public function personalDetails()
     {
-        return $this->belongsTo(PersonalDetail::class);
+        return $this->belongsTo(PersonalDetail::class, 'personal_detail_id');
     }
 
     /**
