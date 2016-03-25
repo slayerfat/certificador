@@ -39,12 +39,12 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'users.index', 'uses' => 'UsersController@index']
     );
     Route::get(
-        '/usuarios/crear',
-        ['as' => 'users.create', 'uses' => 'UsersController@create']
-    );
-    Route::get(
         '/usuarios/{id}',
         ['as' => 'users.show', 'uses' => 'UsersController@show']
+    );
+    Route::get(
+        '/usuarios/crear',
+        ['as' => 'users.create', 'uses' => 'UsersController@create']
     );
     Route::post(
         '/usuarios',
