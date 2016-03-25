@@ -40,6 +40,17 @@ class Title extends Model
     ];
 
     /**
+     * Modifica la descripcion para que siempre sea mayuscula la primera letra.
+     *
+     * @param $value
+     * @return string
+     */
+    public function setDescAttribute($value)
+    {
+        return $this->attributes['desc'] = ucfirst($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function professors()

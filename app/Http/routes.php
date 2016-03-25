@@ -59,12 +59,12 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'users.index', 'uses' => 'UsersController@index']
     );
     Route::get(
-        '/usuarios/{id}',
-        ['as' => 'users.show', 'uses' => 'UsersController@show']
-    );
-    Route::get(
         '/usuarios/crear',
         ['as' => 'users.create', 'uses' => 'UsersController@create']
+    );
+    Route::get(
+        '/usuarios/{id}',
+        ['as' => 'users.show', 'uses' => 'UsersController@show']
     );
     Route::post(
         '/usuarios',
@@ -99,5 +99,35 @@ Route::group(['middleware' => ['web']], function () {
     Route::patch(
         '/datos-personales/{id}',
         ['as' => 'personalDetails.update', 'uses' => 'PersonalDetailsController@update']
+    );
+
+    // Titles
+    Route::get(
+        '/titulos',
+        ['as' => 'titles.index', 'uses' => 'TitlesController@index']
+    );
+    Route::get(
+        '/titulos/crear',
+        ['as' => 'titles.create', 'uses' => 'TitlesController@create']
+    );
+    Route::get(
+        '/titulos/{id}',
+        ['as' => 'titles.show', 'uses' => 'TitlesController@show']
+    );
+    Route::post(
+        '/titulos',
+        ['as' => 'titles.store', 'uses' => 'TitlesController@store']
+    );
+    Route::get(
+        '/titulos/{id}/editar',
+        ['as' => 'titles.edit', 'uses' => 'TitlesController@edit']
+    );
+    Route::patch(
+        '/titulos/{id}',
+        ['as' => 'titles.update', 'uses' => 'TitlesController@update']
+    );
+    Route::delete(
+        '/titulos/{id}',
+        ['as' => 'titles.destroy', 'uses' => 'TitlesController@destroy']
     );
 });

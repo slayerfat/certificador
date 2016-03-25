@@ -43,6 +43,13 @@
                 </a>
               </li>
 
+              <!-- Títulos -->
+              <li>
+                <a href="{{ route('titles.index') }}">
+                  <i class="fa fa-btn fa-sitemap"></i>Títulos Descriptivos
+                </a>
+              </li>
+
               <!-- Profesores -->
               <li>
                 <a href="{{ route('professors.index') }}">
