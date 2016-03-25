@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use Illuminate\Http\Request;
+use App\Http\Requests\ProfessorRequest;
+use App\PersonalDetail;
+use App\Professor;
+use App\Title;
+use Redirect;
+use View;
 
 class ProfessorsController extends Controller
 {
@@ -24,39 +29,46 @@ class ProfessorsController extends Controller
      */
     public function index()
     {
-        return 'hello';
+        $professors = Professor::all();
+
+        return View::make('professors.index', compact('professors'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $details = PersonalDetail::findOrFail($id);
+        $titles  = Title::pluck('desc', 'id');
+
+        return View::make(
+            'professors.forms.create',
+            compact('details', 'titles')
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param int $id
+     * @param \App\Http\Requests\ProfessorRequest $request
+     * @param \App\Professor $professor
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($id, ProfessorRequest $request, Professor $professor)
     {
-        //
-    }
+        /** @var PersonalDetail $details */
+        $details = PersonalDetail::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $professor->title_id = $request->input('title_id');
+        $professor->position = $request->input('position');
+        $details->professor()->save($professor);
+
+        return Redirect::route('users.show', $details->user_id);
     }
 
     /**
@@ -67,19 +79,32 @@ class ProfessorsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $professor = Professor::findOrFail($id);
+        $titles    = Title::pluck('desc', 'id');
+
+        return View::make(
+            'professors.forms.edit',
+            compact('professor', 'titles')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param \App\Http\Requests\ProfessorRequest $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfessorRequest $request, $id)
     {
-        //
+        /** @var Professor $professor */
+        $professor           = Professor::findOrFail($id)->load('personalDetails');
+        $professor->title_id = $request->input('title_id');
+        $professor->position = $request->input('position');
+        $professor->save();
+
+        return Redirect::route('users.show',
+            $professor->personalDetails->user_id);
     }
 
     /**

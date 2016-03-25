@@ -32,6 +32,26 @@ Route::group(['middleware' => ['web']], function () {
         '/profesores',
         ['as' => 'professors.index', 'uses' => 'ProfessorsController@index']
     );
+    Route::get(
+        '/profesores/crear/{personalDetailsID}',
+        ['as' => 'professors.create', 'uses' => 'ProfessorsController@create']
+    );
+    Route::post(
+        '/profesores/{personalDetailsID}',
+        ['as' => 'professors.store', 'uses' => 'ProfessorsController@store']
+    );
+    Route::get(
+        '/profesores/{id}/editar',
+        ['as' => 'professors.edit', 'uses' => 'ProfessorsController@edit']
+    );
+    Route::patch(
+        '/profesores/{id}',
+        ['as' => 'professors.update', 'uses' => 'ProfessorsController@update']
+    );
+    Route::delete(
+        '/profesores/{id}',
+        ['as' => 'professors.destroy', 'uses' => 'ProfessorsController@destroy']
+    );
 
     // Users
     Route::get(
@@ -51,7 +71,7 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'users.store', 'uses' => 'UsersController@store']
     );
     Route::get(
-        '/usuarios/{id}/edit',
+        '/usuarios/{id}/editar',
         ['as' => 'users.edit', 'uses' => 'UsersController@edit']
     );
     Route::patch(
@@ -73,7 +93,7 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'personalDetails.store', 'uses' => 'PersonalDetailsController@store']
     );
     Route::get(
-        '/datos-personales/{id}/edit',
+        '/datos-personales/{id}/editar',
         ['as' => 'personalDetails.edit', 'uses' => 'PersonalDetailsController@edit']
     );
     Route::patch(

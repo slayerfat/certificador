@@ -8,11 +8,6 @@
           'resource' => 'users',
           'id' => $user->id
         ])
-        @if($user->personalDetails && !$user->personalDetails->professor)
-          <a href="{{ route('users.create') }}" class="btn btn-default">
-            Crear información Profesoral
-          </a>
-        @endif
       @endif
 
       {{-- user info --}}
@@ -36,6 +31,9 @@
         <h1>C.I. {{ $user->personalDetails->ci }}</h1>
 
         <h2>
+          @if ($user->personalDetails && $user->personalDetails->professor)
+            {{ $user->personalDetails->professor->title->desc }}
+          @endif
           {{$user->personalDetails->formattedNames(true)}}
         </h2>
 
@@ -49,20 +47,41 @@
           {{$phoneParser->parseNumber($user->personalDetails->cellphone)}}
         </h3>
 
-          @can('update', $user)
-          <a href="{{ route("personalDetails.edit", $user->personalDetails->id) }}"
-             class="btn btn-default">
-            <i class="fa fa-btn fa-edit"></i>Editar Información Personal
-          </a>
-          @endcan
+        @can('update', $user)
+        <a
+          href="{{ route("personalDetails.edit", $user->personalDetails->id) }}"
+          class="btn btn-default">
+          <i class="fa fa-btn fa-edit"></i>Editar Información Personal
+        </a>
+        @endcan
       @endif
 
-        @unless ($user->personalDetails)
-          <a href="{{ route("personalDetails.create", $user->id) }}"
-             class="btn btn-default">
-            <i class="fa fa-btn fa-edit"></i>Añadir Información Personal
-          </a>
-        @endunless
+      @if (!$user->personalDetails)
+        <a href="{{ route("personalDetails.create", $user->id) }}"
+           class="btn btn-default">
+          <i class="fa fa-btn fa-plus"></i>Añadir Información Personal
+        </a>
+      @endif
+
+      <hr>
+
+      @if(Auth::user()->admin && $user->personalDetails && !$user->personalDetails->professor)
+        <a href="{{ route('professors.create', $user->personalDetails->id) }}"
+           class="btn btn-default"
+        >
+          <i class="fa fa-btn fa-plus"></i>Crear información Profesoral
+        </a>
+      @endif
+
+      @if ($user->personalDetails && $user->personalDetails->professor)
+        <h2>Posición: {{ $user->personalDetails->professor->position }}</h2>
+
+        <a
+          href="{{ route("professors.edit", $user->personalDetails->professor->id) }}"
+          class="btn btn-default">
+          <i class="fa fa-btn fa-edit"></i>Editar información Profesoral
+        </a>
+      @endif
 
       @include('layouts.admins.basic-audit', ['model' => $user])
     </div>
