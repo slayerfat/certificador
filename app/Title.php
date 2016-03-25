@@ -42,7 +42,7 @@ class Title extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function professor()
+    public function professors()
     {
         return $this->hasMany(Professor::class);
     }
