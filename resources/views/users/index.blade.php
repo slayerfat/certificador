@@ -9,7 +9,7 @@
   <div class="container">
     <h1>Usuarios en el sistema</h1>
     <a href="{{ route('users.create') }}" class="btn btn-default">
-      Crear Usuario
+      <i class="fa fa-btn fa-plus"></i>Crear Usuario
     </a>
     <hr/>
     <div class="row">
