@@ -74,7 +74,7 @@ class UsersController extends Controller
         $user = User::whereName($id)
             ->orWhere('id', $id)
             ->firstOrFail()
-            ->load('personalDetails');
+            ->load('personalDetails', 'personalDetails.professor');
 
         return View::make('users.show', compact('user', 'phoneParser'));
     }
