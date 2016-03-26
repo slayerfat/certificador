@@ -56,6 +56,13 @@
                   <i class="fa fa-btn fa-user-md"></i>Profesores
                 </a>
               </li>
+
+              <!-- Títulos -->
+              <li>
+                <a href="{{ route('institutes.index') }}">
+                  <i class="fa fa-btn fa-building"></i>Institutos
+                </a>
+              </li>
             </ul>
           </li>
         </ul>

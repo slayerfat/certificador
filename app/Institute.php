@@ -41,6 +41,17 @@ class Institute extends Model
     ];
 
     /**
+     * La primera letra debera estar capitalizada en el nombre.
+     *
+     * @param $value
+     * @return string
+     */
+    public function setNameAttribute($value)
+    {
+        return $this->attributes['name'] = ucfirst($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function professors()

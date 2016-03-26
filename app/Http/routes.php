@@ -130,4 +130,34 @@ Route::group(['middleware' => ['web']], function () {
         '/titulos/{id}',
         ['as' => 'titles.destroy', 'uses' => 'TitlesController@destroy']
     );
+
+    // Institutes
+    Route::get(
+        '/institutos',
+        ['as' => 'institutes.index', 'uses' => 'InstitutesController@index']
+    );
+    Route::get(
+        '/institutos/crear',
+        ['as' => 'institutes.create', 'uses' => 'InstitutesController@create']
+    );
+    Route::get(
+        '/institutos/{id}',
+        ['as' => 'institutes.show', 'uses' => 'InstitutesController@show']
+    );
+    Route::post(
+        '/institutos',
+        ['as' => 'institutes.store', 'uses' => 'InstitutesController@store']
+    );
+    Route::get(
+        '/institutos/{id}/editar',
+        ['as' => 'institutes.edit', 'uses' => 'InstitutesController@edit']
+    );
+    Route::patch(
+        '/institutos/{id}',
+        ['as' => 'institutes.update', 'uses' => 'InstitutesController@update']
+    );
+    Route::delete(
+        '/institutos/{id}',
+        ['as' => 'institutes.destroy', 'uses' => 'InstitutesController@destroy']
+    );
 });
