@@ -166,6 +166,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
+        Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
     ],
 
     /*
