@@ -160,4 +160,34 @@ Route::group(['middleware' => ['web']], function () {
         '/institutos/{id}',
         ['as' => 'institutes.destroy', 'uses' => 'InstitutesController@destroy']
     );
+
+    // Events
+    Route::get(
+        '/eventos',
+        ['as' => 'events.index', 'uses' => 'EventsController@index']
+    );
+    Route::get(
+        '/eventos/crear',
+        ['as' => 'events.create', 'uses' => 'EventsController@create']
+    );
+    Route::get(
+        '/eventos/{id}',
+        ['as' => 'events.show', 'uses' => 'EventsController@show']
+    );
+    Route::post(
+        '/eventos',
+        ['as' => 'events.store', 'uses' => 'EventsController@store']
+    );
+    Route::get(
+        '/eventos/{id}/editar',
+        ['as' => 'events.edit', 'uses' => 'EventsController@edit']
+    );
+    Route::patch(
+        '/eventos/{id}',
+        ['as' => 'events.update', 'uses' => 'EventsController@update']
+    );
+    Route::delete(
+        '/eventos/{id}',
+        ['as' => 'events.destroy', 'uses' => 'EventsController@destroy']
+    );
 });

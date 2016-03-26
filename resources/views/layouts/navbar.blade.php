@@ -57,6 +57,13 @@
                 </a>
               </li>
 
+              <!-- Eventos/Jornadas/Cursos -->
+              <li>
+                <a href="{{ route('events.index') }}">
+                  <i class="fa fa-btn fa-briefcase"></i>Eventos
+                </a>
+              </li>
+
               <!-- Títulos -->
               <li>
                 <a href="{{ route('institutes.index') }}">

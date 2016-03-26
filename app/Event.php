@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -55,6 +56,29 @@ class Event extends Model
      * @var array
      */
     protected $dates = ['date'];
+
+    /**
+     * Nos interesa guardar la fecha sin las horas y minutos.
+     *
+     * @param string $value la fecha a guardar
+     * @return Carbon
+     */
+    public function setDateAttribute($value)
+    {
+        return $this->attributes['date'] =
+            Carbon::createFromFormat('Y-m-d', $value);
+    }
+
+    /**
+     * Nos interesa obtener la fecha sin las horas y minutos.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
