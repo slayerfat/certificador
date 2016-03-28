@@ -14,11 +14,11 @@ class CreateProfessorsTable extends Migration
     {
         Schema::create('professors', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('personal_detail_id')->nullable();
+            $table->unsignedInteger('personal_detail_id')->unique();
             $table->foreign('personal_detail_id')->references('id')->on('personal_details');
-            $table->unsignedInteger('title_id')->nullable();
+            $table->unsignedInteger('title_id');
             $table->foreign('title_id')->references('id')->on('titles');
-            $table->string('position');
+            $table->string('position')->nullable();
             $table->timestamps();
         });
     }
