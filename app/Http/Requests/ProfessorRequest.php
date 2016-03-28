@@ -34,7 +34,7 @@ class ProfessorRequest extends Request
     {
         return [
             'title_id' => 'required|numeric|exists:titles,id',
-            'position' => 'required|string|between:5,250',
+            'position' => 'string|between:5,250',
         ];
     }
 }

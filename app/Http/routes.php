@@ -86,19 +86,27 @@ Route::group(['middleware' => ['web']], function () {
     // Personal Details
     Route::get(
         '/datos-personales/crear/{userID}',
-        ['as' => 'personalDetails.create', 'uses' => 'PersonalDetailsController@create']
+        ['as'   => 'personalDetails.create',
+         'uses' => 'PersonalDetailsController@create',
+        ]
     );
     Route::post(
         '/datos-personales/{userID}',
-        ['as' => 'personalDetails.store', 'uses' => 'PersonalDetailsController@store']
+        ['as'   => 'personalDetails.store',
+         'uses' => 'PersonalDetailsController@store',
+        ]
     );
     Route::get(
         '/datos-personales/{id}/editar',
-        ['as' => 'personalDetails.edit', 'uses' => 'PersonalDetailsController@edit']
+        ['as'   => 'personalDetails.edit',
+         'uses' => 'PersonalDetailsController@edit',
+        ]
     );
     Route::patch(
         '/datos-personales/{id}',
-        ['as' => 'personalDetails.update', 'uses' => 'PersonalDetailsController@update']
+        ['as'   => 'personalDetails.update',
+         'uses' => 'PersonalDetailsController@update',
+        ]
     );
 
     // Titles
@@ -189,5 +197,35 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete(
         '/eventos/{id}',
         ['as' => 'events.destroy', 'uses' => 'EventsController@destroy']
+    );
+
+    // InstitutesProfessors
+    Route::get(
+        '/institutos-profesores/crear-lead-prof/{id}',
+        [
+            'as'   => 'institutesProfessors.createLeadProf',
+            'uses' => 'InstitutesProfessorsController@createLeadForProfessor',
+        ]
+    );
+    Route::get(
+        '/institutos-profesores/crear-lead-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.createLeadInst',
+            'uses' => 'InstitutesProfessorsController@createLeadForInstitute',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-lead-prof/{id}',
+        [
+            'as'   => 'institutesProfessors.storeLeadProf',
+            'uses' => 'InstitutesProfessorsController@storeLeadForProfessor',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-lead-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.storeLeadInst',
+            'uses' => 'InstitutesProfessorsController@storeLeadForInstitute',
+        ]
     );
 });

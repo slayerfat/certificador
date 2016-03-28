@@ -16,7 +16,8 @@
         </h1>
 
         <h2>
-          Perteneciente al {{ $event->institute->name }}
+          Perteneciente al
+          {{ link_to_route('institutes.show', $event->institute->name, $event->institute->id) }}
         </h2>
 
         <h3>

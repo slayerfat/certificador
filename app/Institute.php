@@ -52,7 +52,7 @@ class Institute extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Professor
      */
     public function professors()
     {

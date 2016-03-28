@@ -14,6 +14,15 @@
         <h1>
           {{ $institute->name }}
         </h1>
+
+        {!!
+        link_to_route(
+          'institutesProfessors.createLeadInst',
+          'Asignar Líder de la institución',
+          $institute->id,
+          ['class' => 'btn btn-default']
+        )
+        !!}
       </div>
     </div>
 
