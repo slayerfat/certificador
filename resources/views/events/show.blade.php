@@ -25,6 +25,11 @@
           {{ $event->hours }}
           {{ $event->hours === 1 ? 'Hora' : 'Horas' }} de duración
         </h3>
+
+        <hr>
+
+        <h3>Contenido:</h3>
+        {!! $event->content !!}
       </div>
     </div>
 
