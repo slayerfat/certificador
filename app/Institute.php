@@ -52,7 +52,7 @@ class Institute extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
      */
     public function events()
     {
@@ -62,7 +62,7 @@ class Institute extends Model
     /**
      * Busca el profesor encargado del instituto
      *
-     * @return \Illuminate\Database\Eloquent\Model|mixed|null|static
+     * @return \Illuminate\Database\Eloquent\Model|mixed|null|\App\Professor
      */
     public function leader()
     {
@@ -70,7 +70,7 @@ class Institute extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Professor
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Professor|\Illuminate\Database\Query\Builder
      */
     public function professors()
     {

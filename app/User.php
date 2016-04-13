@@ -66,7 +66,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne|\Illuminate\Database\Query\Builder
      */
     public function personalDetails()
     {
@@ -74,7 +74,7 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
      */
     public function events()
     {

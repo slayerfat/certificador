@@ -97,7 +97,7 @@ class PersonalDetail extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo|\Illuminate\Database\Query\Builder
      */
     public function user()
     {
@@ -105,7 +105,7 @@ class PersonalDetail extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne|\Illuminate\Database\Query\Builder
      */
     public function professor()
     {
