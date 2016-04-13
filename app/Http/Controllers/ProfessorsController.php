@@ -65,7 +65,6 @@ class ProfessorsController extends Controller
         $details = PersonalDetail::findOrFail($id);
 
         $professor->title_id = $request->input('title_id');
-        $professor->position = $request->input('position');
         $details->professor()->save($professor);
 
         return Redirect::route('users.show', $details->user_id);
@@ -100,11 +99,12 @@ class ProfessorsController extends Controller
         /** @var Professor $professor */
         $professor           = Professor::findOrFail($id)->load('personalDetails');
         $professor->title_id = $request->input('title_id');
-        $professor->position = $request->input('position');
         $professor->save();
 
-        return Redirect::route('users.show',
-            $professor->personalDetails->user_id);
+        return Redirect::route(
+            'users.show',
+            $professor->personalDetails->user_id
+        );
     }
 
     /**

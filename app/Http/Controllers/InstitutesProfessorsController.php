@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\ProfessorLeadsForInstituteRequest;
 use App\Institute;
 use App\Professor;
+use Flash;
 use Redirect;
 use View;
 
@@ -50,10 +51,101 @@ class InstitutesProfessorsController extends Controller
                 $professors[$professor->id] = $data;
             });
 
+        if (!$professors) {
+            Flash::error('No hay Profesores disponibles para asignar');
+
+            return Redirect::back();
+        }
+
         return View::make(
             'institutesProfessors.forms.createLeadInstitute',
             compact('institute', 'professors')
         );
+    }
+
+    /**
+     * Añade un profesor en un instituto como lider del mismo.
+     *
+     * @param int $id
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function createProfessorForInstitute($id)
+    {
+        $professors = [];
+        /** @var Institute $institute */
+        $institute = Institute::findOrFail($id);
+        $existing  = $institute->professors()->pluck('id');
+
+        Professor::whereNotIn('id', $existing)
+            ->with('personalDetails')
+            ->get()
+            ->each(function (Professor $professor) use (&$professors) {
+                $surname = $professor->personalDetails->first_surname;
+                $name    = $professor->personalDetails->first_name;
+                $ci      = $professor->personalDetails->ci;
+                $data    = "{$surname}, {$name}. {$ci}";
+
+                $professors[$professor->id] = $data;
+            });
+
+        if (!$professors) {
+            Flash::error('No hay Profesores disponibles para asignar');
+
+            return Redirect::back();
+        }
+
+        return View::make(
+            'institutesProfessors.forms.createProfInstitute',
+            compact('institute', 'professors')
+        );
+    }
+
+    /**
+     * Guarda un profesor en un instituto como lider del mismo.
+     *
+     * @param int $id
+     * @param \App\Http\Requests\ProfessorLeadsForInstituteRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeProfessorForInstitute(
+        $id,
+        ProfessorLeadsForInstituteRequest $request
+    ) {
+        /** @var Institute $institute */
+        $institute = Institute::findOrFail($id);
+        $input     = $request->input('professors');
+        $position  = $request->input('position');
+        $this->insertProfessor($institute, $input, $position, false);
+
+        return Redirect::route('institutes.show', $institute->id);
+    }
+
+    /**
+     * Inserta adecuadamente algun profesor a la base de datos.
+     *
+     * @param \App\Institute $institute
+     * @param int $id
+     * @param string $position detalla el cargo asociado al profesor
+     * @param bool $leads determina si es o no encargado del instituto
+     */
+    public function insertProfessor(
+        Institute $institute,
+        $id,
+        $position,
+        $leads
+    ) {
+        $isEmpty = $institute->professors()->whereId($id)->get()->isEmpty();
+
+        // si no esta vacio debemos separar a este
+        // profesor para reasignarlo como lider
+        if (!$isEmpty) {
+            $institute->professors()->detach($id);
+        }
+
+        $institute->professors()->attach($id, [
+            'leads'    => $leads,
+            'position' => $position,
+        ]);
     }
 
     /**
@@ -70,29 +162,28 @@ class InstitutesProfessorsController extends Controller
         /** @var Institute $institute */
         $institute = Institute::findOrFail($id);
         $input     = $request->input('professors');
-        $this->insertProfessor($institute, $input);
+        $position  = $request->input('position');
+        $this->insertProfessor($institute, $input, $position, true);
 
         return Redirect::route('institutes.show', $institute->id);
     }
 
     /**
-     * Inserta adecuadamente algun profesor a la base de datos.
+     * Elimina la relacion entre un profesor y un instituto
      *
-     * @param \App\Institute $institute
-     * @param int $id
+     * @param int $professorId
+     * @param int $instituteId
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function insertProfessor(Institute $institute, $id)
+    public function destroyProfessorInstitute($professorId, $instituteId)
     {
-        $isEmpty = $institute->professors()->whereId($id)->get()->isEmpty();
+        /** @var Institute $institute */
+        $institute = Institute::findOrFail($instituteId);
+        $institute->professors()->detach([$professorId]);
 
-        // si no esta vacio debemos separar a este
-        // profesor para reasignarlo como lider
-        if (!$isEmpty) {
-            $institute->professors()->detach($id);
-        }
+        Flash::success('Profesor eliminado correctamente.');
 
-        $institute->professors()->attach($id, [
-            'leads' => true,
-        ]);
+        return Redirect::route('institutes.show', $institute->id);
     }
 }

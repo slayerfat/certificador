@@ -26,7 +26,20 @@
               )
             }}
             {!! Html::mailto($institute->leader()->personalDetails->user->email) !!}
+
+            <br>
+
+            {{ $institute->leader()->pivot->position }}
           </h2>
+
+          {!!
+          link_to_route(
+            'institutesProfessors.createLeadInst',
+            'Cambiar Líder de la institución',
+            $institute->id,
+            ['class' => 'btn btn-default']
+          )
+          !!}
         @else
           {!!
           link_to_route(
@@ -37,12 +50,21 @@
           )
           !!}
         @endif
+
+        {!!
+          link_to_route(
+            'institutesProfessors.createProfInst',
+            'Añadir profesor a la institución',
+            $institute->id,
+            ['class' => 'btn btn-default']
+          )
+          !!}
       </div>
     </div>
 
     <div class="row">
       <div class="col-xs-12">
-        <h2>Información relacionada</h2>
+        <h2>Profesores relacionados</h2>
         <table
           id="tabla"
           data-toggle="table"
@@ -77,6 +99,10 @@
               data-switchable="false">
             Título
           </th>
+          <th data-field="actions" data-sortable="false"
+              data-switchable="true">
+            Acciones
+          </th>
           </thead>
           <tbody>
           @foreach ($institute->professors as $professor)
@@ -87,6 +113,14 @@
               <td>{{ $professor->personalDetails->first_name }}</td>
               <td>{{ $professor->personalDetails->first_surname }}</td>
               <td>{{ $professor->title->desc }}</td>
+              <td>
+                <a href="#" title="Eliminar" class="professor-action-delete"
+                   data-id="{{ $professor->id }}">
+                  <i class="fa fa-times text-danger"></i>
+                </a>
+                {!! Form::open(['route' => ['institutesProfessors.destroyProfInst', $professor->id, $institute->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
+                {!! Form::close() !!}
+              </td>
             </tr>
           @endforeach
           </tbody>
@@ -107,5 +141,14 @@
   <script src="{!! asset('js/initBootstrapTable.js') !!}"></script>
   <script type="text/javascript">
     initBootstrapTable("{!! route('users.show', 'no-data') !!}")
+  </script>
+  <script>
+    $('document').ready(function () {
+      $('.professor-action-delete').click(function () {
+        var id = $(this).data('id');
+
+        $('#professor-delete-' + id).submit();
+      });
+    });
   </script>
 @stop

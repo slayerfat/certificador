@@ -200,18 +200,12 @@ Route::group(['middleware' => ['web']], function () {
     );
 
     // InstitutesProfessors
+    // Relaciona un profesor lead a un instituto (desde profesor)
     Route::get(
         '/institutos-profesores/crear-lead-prof/{id}',
         [
             'as'   => 'institutesProfessors.createLeadProf',
             'uses' => 'InstitutesProfessorsController@createLeadForProfessor',
-        ]
-    );
-    Route::get(
-        '/institutos-profesores/crear-lead-inst/{id}',
-        [
-            'as'   => 'institutesProfessors.createLeadInst',
-            'uses' => 'InstitutesProfessorsController@createLeadForInstitute',
         ]
     );
     Route::post(
@@ -221,11 +215,45 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'InstitutesProfessorsController@storeLeadForProfessor',
         ]
     );
+
+    // Relaciona un profesor lead a un instituto (desde instituto)
+    Route::get(
+        '/institutos-profesores/crear-lead-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.createLeadInst',
+            'uses' => 'InstitutesProfessorsController@createLeadForInstitute',
+        ]
+    );
     Route::post(
         '/institutos-profesores/crear-lead-inst/{id}',
         [
             'as'   => 'institutesProfessors.storeLeadInst',
             'uses' => 'InstitutesProfessorsController@storeLeadForInstitute',
+        ]
+    );
+
+    // Varios profesores a ser insertados a un instituto
+    Route::get(
+        '/institutos-profesores/crear-prof-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.createProfInst',
+            'uses' => 'InstitutesProfessorsController@createProfessorForInstitute',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-prof-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.storeProfInst',
+            'uses' => 'InstitutesProfessorsController@storeProfessorForInstitute',
+        ]
+    );
+
+    // Eliminar profesor de instituto
+    Route::delete(
+        '/institutos-profesores/eliminar-prof-inst/{professor}/{institute}',
+        [
+            'as'   => 'institutesProfessors.destroyProfInst',
+            'uses' => 'InstitutesProfessorsController@destroyProfessorInstitute',
         ]
     );
 });
