@@ -35,8 +35,8 @@ class PersonalDetailsRequest extends Request
             'last_name'     => 'regex:/^[a-zA-Z-_áéíóúÁÉÍÓÚÑñ\']+$/|min:3|max:20',
             'first_surname' => 'required|regex:/^[a-zA-Z-_áéíóúÁÉÍÓÚÑñ\']+$/|min:3|max:20',
             'last_surname'  => 'regex:/^[a-zA-Z-_áéíóúÁÉÍÓÚÑñ\']+$/|min:3|max:20',
-            'phone'         => 'required|max:40',
-            'cellphone'     => 'max:40',
+            'phone'         => 'required|between:11,11|regex:/^[0-9]+$/',
+            'cellphone'     => 'between:11,11|regex:/^[0-9]+$/',
             'birthday'      => "required|date|before:$date",
         ];
 

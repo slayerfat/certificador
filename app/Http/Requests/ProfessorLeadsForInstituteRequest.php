@@ -23,6 +23,7 @@ class ProfessorLeadsForInstituteRequest extends Request
     {
         return [
             'professors' => 'required',
+            'position'   => 'string|between:5,250',
         ];
     }
 }
