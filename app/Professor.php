@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Professor
  *
  * @property integer $id
- * @property integer $personal_details_id
+ * @property integer $personal_detail_id
  * @property integer $title_id
  * @property string $position
  * @property \Carbon\Carbon $created_at
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Institute[] $institutes
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereLeads($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePersonalDetailsId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePersonalDetailId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereTitleId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePosition($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereCreatedAt($value)
