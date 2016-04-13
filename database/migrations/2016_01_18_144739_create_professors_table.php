@@ -18,7 +18,6 @@ class CreateProfessorsTable extends Migration
             $table->foreign('personal_detail_id')->references('id')->on('personal_details');
             $table->unsignedInteger('title_id');
             $table->foreign('title_id')->references('id')->on('titles');
-            $table->string('position')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateInstituteProfessorTable extends Migration
 {
@@ -18,6 +18,7 @@ class CreateInstituteProfessorTable extends Migration
             $table->unsignedInteger('professor_id')->nullable();
             $table->foreign('professor_id')->references('id')->on('professors');
             $table->boolean('leads')->default(false);
+            $table->string('position')->nullable();
         });
     }
 

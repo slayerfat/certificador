@@ -74,6 +74,6 @@ class Institute extends Model
      */
     public function professors()
     {
-        return $this->belongsToMany(Professor::class)->withPivot('leads');
+        return $this->belongsToMany(Professor::class)->withPivot('leads', 'position');
     }
 }

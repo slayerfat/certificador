@@ -74,16 +74,31 @@
       @endif
 
       @if ($user->personalDetails && $user->personalDetails->professor)
-        <h2>Posición: {{ $user->personalDetails->professor->position }}</h2>
-
         <a
           href="{{ route("professors.edit", $user->personalDetails->professor->id) }}"
           class="btn btn-default">
           <i class="fa fa-btn fa-edit"></i>Editar información Profesoral
         </a>
+
+        @foreach ($user->personalDetails->professor->institutes as $institute)
+          <h2>
+            {{ $institute->pivot->leads ? 'Encargado' : 'Miembro' }} de:
+            <a href="{{ route('institutes.show', $institute->id) }}">
+              {{ $institute->name }}
+            </a>
+
+            <br>
+
+            {{ $institute->pivot->position }}
+          </h2>
+        @endforeach
       @endif
 
-      @include('layouts.admins.basic-audit', ['model' => $user])
+      @include('layouts.admins.basic-audit', [
+        'model'   => $user,
+        'created' => 'Usuario creado',
+        'updated' => 'Usuario actualizado',
+      ])
     </div>
   </div>
 @stop

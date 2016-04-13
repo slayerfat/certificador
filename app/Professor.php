@@ -67,6 +67,6 @@ class Professor extends Model
      */
     public function institutes()
     {
-        return $this->belongsToMany(Institute::class)->withPivot('leads');
+        return $this->belongsToMany(Institute::class)->withPivot('leads', 'position');
     }
 }
