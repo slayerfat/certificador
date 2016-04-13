@@ -52,18 +52,28 @@ class Institute extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Professor
-     */
-    public function professors()
-    {
-        return $this->belongsToMany(Professor::class)->withPivot('leads');
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    /**
+     * Busca el profesor encargado del instituto
+     *
+     * @return \Illuminate\Database\Eloquent\Model|mixed|null|static
+     */
+    public function leader()
+    {
+        return $this->professors()->whereLeads(1)->first();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\App\Professor
+     */
+    public function professors()
+    {
+        return $this->belongsToMany(Professor::class)->withPivot('leads');
     }
 }

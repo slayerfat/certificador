@@ -15,14 +15,28 @@
           {{ $institute->name }}
         </h1>
 
-        {!!
-        link_to_route(
-          'institutesProfessors.createLeadInst',
-          'Asignar Líder de la institución',
-          $institute->id,
-          ['class' => 'btn btn-default']
-        )
-        !!}
+        @if ($institute->leader())
+          <h2>
+            Encargado:
+            {{
+            link_to_route(
+              'users.show',
+              $institute->leader()->personalDetails->formattedNames(),
+              $institute->leader()->personalDetails->user->id
+              )
+            }}
+            {!! Html::mailto($institute->leader()->personalDetails->user->email) !!}
+          </h2>
+        @else
+          {!!
+          link_to_route(
+            'institutesProfessors.createLeadInst',
+            'Asignar Líder de la institución',
+            $institute->id,
+            ['class' => 'btn btn-default']
+          )
+          !!}
+        @endif
       </div>
     </div>
 
