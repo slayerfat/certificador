@@ -200,51 +200,67 @@ Route::group(['middleware' => ['web']], function () {
     );
 
     // InstitutesProfessors
-    // Relaciona un profesor lead a un instituto (desde profesor)
+    // Desde instituto a profesor (LEAD)
     Route::get(
-        '/institutos-profesores/crear-lead-prof/{id}',
+        '/institutos-profesores/crear-lead-inst-to-prof/{id}',
         [
-            'as'   => 'institutesProfessors.createLeadProf',
-            'uses' => 'InstitutesProfessorsController@createLeadForProfessor',
+            'as'   => 'institutesProfessors.createLeadFromInstToProf',
+            'uses' => 'InstitutesProfessorsController@createLeadFromInstituteToProfessor',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-lead-prof/{id}',
+        '/institutos-profesores/crear-lead-inst-to-prof/{id}',
         [
-            'as'   => 'institutesProfessors.storeLeadProf',
-            'uses' => 'InstitutesProfessorsController@storeLeadForProfessor',
+            'as'   => 'institutesProfessors.storeLeadFromInstToProf',
+            'uses' => 'InstitutesProfessorsController@storeLeadFromInstituteToProfessor',
         ]
     );
 
-    // Relaciona un profesor lead a un instituto (desde instituto)
+    // Desde instituto a profesor (NO LEAD)
     Route::get(
-        '/institutos-profesores/crear-lead-inst/{id}',
+        '/institutos-profesores/crear-no-lead-from-inst-to-prof/{id}',
         [
-            'as'   => 'institutesProfessors.createLeadInst',
-            'uses' => 'InstitutesProfessorsController@createLeadForInstitute',
+            'as'   => 'institutesProfessors.createNoLeadFromInstToProf',
+            'uses' => 'InstitutesProfessorsController@createNoLeadFromInstituteToProfessor',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-lead-inst/{id}',
+        '/institutos-profesores/crear-no-lead-from-inst-to-prof/{id}',
         [
-            'as'   => 'institutesProfessors.storeLeadInst',
-            'uses' => 'InstitutesProfessorsController@storeLeadForInstitute',
+            'as'   => 'institutesProfessors.storeNoLeadFromInstToProf',
+            'uses' => 'InstitutesProfessorsController@storeNoLeadFromInstituteToProfessor',
         ]
     );
 
-    // Varios profesores a ser insertados a un instituto
+    // Desde Profesor a Instituto (LEAD)
     Route::get(
-        '/institutos-profesores/crear-prof-inst/{id}',
+        '/institutos-profesores/crear-lead-prof-to-inst/{id}',
         [
-            'as'   => 'institutesProfessors.createProfInst',
-            'uses' => 'InstitutesProfessorsController@createProfessorForInstitute',
+            'as'   => 'institutesProfessors.createLeadFromProfToInst',
+            'uses' => 'InstitutesProfessorsController@createLeadFromProfessorToInstitute',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-prof-inst/{id}',
+        '/institutos-profesores/crear-lead-prof-to-inst/{id}',
         [
-            'as'   => 'institutesProfessors.storeProfInst',
-            'uses' => 'InstitutesProfessorsController@storeProfessorForInstitute',
+            'as'   => 'institutesProfessors.storeLeadFromProfToInst',
+            'uses' => 'InstitutesProfessorsController@storeLeadFromProfessorToInstitute',
+        ]
+    );
+
+    // Desde Profesor a Instituto (NO LEAD)
+    Route::get(
+        '/institutos-profesores/crear-no-lead-from-prof-to-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.createNoLeadFromProfToInst',
+            'uses' => 'InstitutesProfessorsController@createNoLeadFromProfessorToInstitute',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-no-lead-from-prof-to-inst/{id}',
+        [
+            'as'   => 'institutesProfessors.storeNoLeadFromProfToInst',
+            'uses' => 'InstitutesProfessorsController@storeNoLeadFromProfessorToInstitute',
         ]
     );
 

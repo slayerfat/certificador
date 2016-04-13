@@ -6,20 +6,18 @@
       <div class="col-lg-10 col-lg-offset-1">
         <div class="panel panel-default">
           <div class="panel-heading">
-            Añadir Profesor a la institución {{ $institute->name }}
+            Añadir líder a la institución {{ $institute->name }}
           </div>
           <div class="panel-body">
             @include('errors.bag')
             {!! Form::open(
               [
-                'route' => ['institutesProfessors.storeProfInst', $institute->id],
+                'route' => ['institutesProfessors.storeLeadFromInstToProf', $institute->id],
                 'method' => 'post',
                 'class'  => 'form-horizontal',
               ]
             ) !!}
-            @include('institutesProfessors.forms.bodyLeadInstitute', [
-              'submitBtn' => 'Añadir Profesor a la institución'
-            ])
+            @include('institutesProfessors.forms.bodyLeadInstitute', ['submitBtn' => 'Añadir líder a la institución'])
             {!! Form::close() !!}
           </div>
         </div>

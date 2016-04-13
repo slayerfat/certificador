@@ -63,8 +63,6 @@
         </a>
       @endif
 
-      <hr>
-
       @if(Auth::user()->admin && $user->personalDetails && !$user->personalDetails->professor)
         <a href="{{ route('professors.create', $user->personalDetails->id) }}"
            class="btn btn-default"
@@ -92,6 +90,17 @@
             {{ $institute->pivot->position }}
           </h2>
         @endforeach
+
+          <a
+            href="{{ route("institutesProfessors.createLeadFromProfToInst", $user->personalDetails->professor->id) }}"
+            class="btn btn-default">
+            <i class="fa fa-btn fa-plus"></i>Asignar como líder a Institución
+          </a>
+          <a
+            href="{{ route("institutesProfessors.createNoLeadFromProfToInst", $user->personalDetails->professor->id) }}"
+            class="btn btn-default">
+            <i class="fa fa-btn fa-plus"></i>Asignar a Institución
+          </a>
       @endif
 
       @include('layouts.admins.basic-audit', [

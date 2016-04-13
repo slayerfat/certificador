@@ -5,18 +5,19 @@
     <div class="row">
       <div class="col-lg-10 col-lg-offset-1">
         <div class="panel panel-default">
-          <div class="panel-heading">Añadir lider a la
-            institucion {{ $institute->name }}</div>
+          <div class="panel-heading">
+            Añadir a Institución
+          </div>
           <div class="panel-body">
             @include('errors.bag')
             {!! Form::open(
               [
-                'route' => ['personalDetails.store', $user->id],
+                'route' => ['institutesProfessors.storeNoLeadFromProfToInst', $professor->id],
                 'method' => 'post',
                 'class'  => 'form-horizontal',
               ]
             ) !!}
-            @include('personalDetails.forms.body', ['submitBtn' => 'Añadir Información Personal'])
+            @include('institutesProfessors.forms.bodyLeadProfessor', ['submitBtn' => 'Añadir a Institución'])
             {!! Form::close() !!}
           </div>
         </div>

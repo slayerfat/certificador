@@ -34,7 +34,7 @@
 
           {!!
           link_to_route(
-            'institutesProfessors.createLeadInst',
+            'institutesProfessors.createLeadFromInstToProf',
             'Cambiar Líder de la institución',
             $institute->id,
             ['class' => 'btn btn-default']
@@ -43,7 +43,7 @@
         @else
           {!!
           link_to_route(
-            'institutesProfessors.createLeadInst',
+            'institutesProfessors.createLeadFromInstToProf',
             'Asignar Líder de la institución',
             $institute->id,
             ['class' => 'btn btn-default']
@@ -53,7 +53,7 @@
 
         {!!
           link_to_route(
-            'institutesProfessors.createProfInst',
+            'institutesProfessors.createNoLeadFromInstToProf',
             'Añadir profesor a la institución',
             $institute->id,
             ['class' => 'btn btn-default']
