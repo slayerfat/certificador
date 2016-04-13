@@ -99,6 +99,7 @@ return [
         'images'     => 'Imágenes',
         'image'      => 'Imagen',
         'phone'      => 'Teléfono',
+        'cellphone'  => 'Teléfono Celular',
         'birth_date' => 'Fecha de nacimiento',
         'birthday'   => 'Fecha de nacimiento',
         'rack'       => 'Anaquel',
