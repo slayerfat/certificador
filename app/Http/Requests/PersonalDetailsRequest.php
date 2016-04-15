@@ -38,6 +38,8 @@ class PersonalDetailsRequest extends Request
             'phone'         => 'required|between:11,11|regex:/^[0-9]+$/',
             'cellphone'     => 'between:11,11|regex:/^[0-9]+$/',
             'birthday'      => "required|date|before:$date",
+            'title_id'      => 'required|numeric|exists:titles,id',
+            'sex'           => 'required|string|max:1',
         ];
 
         switch ($this->method()) {

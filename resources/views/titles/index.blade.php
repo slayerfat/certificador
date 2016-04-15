@@ -39,6 +39,9 @@
           <th data-field="admin" data-sortable="true" data-switchable="true">
             Total Profesores
           </th>
+          <th data-field="admin" data-sortable="true" data-switchable="true">
+            Total Usuarios
+          </th>
           </thead>
           <tbody>
           @foreach ($titles as $title)
@@ -52,6 +55,9 @@
               </td>
               <td>
                 {{ $title->professors->count() }}
+              </td>
+              <td>
+                {{ $title->personalDetails->count() }}
               </td>
             </tr>
           @endforeach

@@ -35,8 +35,13 @@
 
 <div class="form-group">
   {!! Form::label('title_id', 'Título:', ['class' => 'col-md-2 control-label']) !!}
-  <div class="col-md-10">
+  <div class="col-md-4">
     {!! Form::select('title_id', $titles, null, ['class' => 'form-control']) !!}
+  </div>
+
+  {!! Form::label('sex', 'Sexo:', ['class' => 'col-md-2 control-label']) !!}
+  <div class="col-md-4">
+    {!! Form::select('sex', ['m' => 'Masculino', 'f' => 'Femenino'], null, ['class' => 'form-control']) !!}
   </div>
 </div>
 

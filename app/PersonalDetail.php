@@ -55,6 +55,7 @@ class PersonalDetail extends Model
         'cellphone',
         'birthday',
         'title_id',
+        'sex',
     ];
 
     /**
