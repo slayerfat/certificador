@@ -15,10 +15,16 @@
           {{ $event->name }}
         </h1>
 
+        <h2>{{ $event->info }}</h2>
+
         <h2>
           Perteneciente al
           {{ link_to_route('institutes.show', $event->institute->name, $event->institute->id) }}
         </h2>
+
+        <h3>
+          {{ $event->location }}
+        </h3>
 
         <h3>
           {{ Date::parse($event->date)->format('l j F \d\e Y') }}.
@@ -34,12 +40,12 @@
           <i class="fa fa-btn fa-plus"></i>Asignar Profesores
         </a>
 
-          <a href="{{ route('events.createAttendants', $event->id) }}"
-             class="btn btn-default">
-            <i class="fa fa-btn fa-plus"></i>Asignar Participantes
-          </a>
+        <a href="{{ route('events.createAttendants', $event->id) }}"
+           class="btn btn-default">
+          <i class="fa fa-btn fa-plus"></i>Asignar Participantes
+        </a>
 
-          <hr>
+        <hr>
 
         <h3>Contenido:</h3>
         {!! $event->content !!}
@@ -177,6 +183,11 @@
                 {{ $attendant->first_surname }}
               </td>
               <td>
+                <a
+                  href="{{ route('events.showPdf', [$attendant->id, $event->id]) }}"
+                  title="Ver Certificado">
+                  <i class="fa fa-file-pdf-o"></i>
+                </a>
                 <a href="#" title="Eliminar" class="attendant-action-delete"
                    data-id="{{ $attendant->id }}">
                   <i class="fa fa-times text-danger"></i>

@@ -17,8 +17,10 @@ class CreateEventsTable extends Migration
             $table->unsignedInteger('institute_id');
             $table->foreign('institute_id')->references('id')->on('institutes');
             $table->string('name');
+            $table->string('info');
             $table->unsignedInteger('hours');
             $table->text('content');
+            $table->text('location');
             $table->date('date');
             $table->timestamps();
             $table->unique(['name', 'date']);

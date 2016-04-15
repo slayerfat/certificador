@@ -41,6 +41,8 @@ class Event extends Model
         'content',
         'hours',
         'date',
+        'location',
+        'info',
     ];
 
     /**
