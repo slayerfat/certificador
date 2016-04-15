@@ -26,6 +26,8 @@ class EventRequest extends Request
             'name'         => $this->getNameRules(),
             'hours'        => 'required|int|min:1',
             'date'         => 'date',
+            'location'     => 'string',
+            'info'         => 'string',
         ];
     }
 

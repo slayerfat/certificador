@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="pdf-body"
-       style="background-image: url('{{asset("images/francisco_miranda.jpeg")}}')">
+       style="background-image: url('{{asset("images/cufm-logos.jpg")}}')">
     {{--Usuario Beneficiado--}}
     @include('events.pdf.user')
     @include('events.pdf.event-details')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Event;
 use App\Http\Requests;
 use App\Http\Requests\EventAttendantRequest;
@@ -245,6 +246,36 @@ class EventsController extends Controller
         Flash::success('Participante eliminado correctamente.');
 
         return Redirect::route('events.show', $event->id);
+    }
+
+    /**
+     * Genera un pdf de certificado de participante
+     *
+     * @param int $attendantId
+     * @param int $eventId
+     * @return \Illuminate\Http\Response
+     */
+    public function showPdf($attendantId, $eventId)
+    {
+        $attendant = PersonalDetail::findOrFail($attendantId);
+        $event = Event::findOrFail($eventId);
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadView('events.pdf.CUFM', compact('attendant', 'event'));
+        $pdf->setOrientation('landscape');
+
+        return $pdf->stream();
+    }
+
+    public function indexPdf($eventId)
+    {
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadView('events.pdf.CUFM');
+        $pdf->setOrientation('landscape');
+
+        return $pdf->stream();
     }
 
     /**

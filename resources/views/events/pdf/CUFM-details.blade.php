@@ -3,10 +3,10 @@
     <p>
       JORNADA
       <br>
-      @{{ TITULO DE JORNADA TAL }}
+      {{ $event->name }}
 
       <br>
-      Alianza CUFM - ISACA
+      {{ $event->info }}
     </p>
 
     <h3>
@@ -14,8 +14,8 @@
     </h3>
 
     <p>
-      Fecha: tal
-      Horas: x
+      Fecha: {{ $event->date }}
+      Horas: {{ $event->hours }}
       Libro: _____
       Hoja: _____
     </p>
@@ -25,9 +25,5 @@
     CONTENIDO:
   </h2>
 
-  <dl>
-    <dt>OBJETIVO TAL</dt>
-    <dt>OBJETIVO TAL</dt>
-    <dt>OBJETIVO TAL</dt>
-  </dl>
+  {!! $event->content !!}
 </div>

@@ -3,15 +3,17 @@
   $i = 0;
   $authorities = [1, 2, 3, 4];
 
-  foreach ($authorities as $authority) {
+  foreach ($event->professors as $professor) {
     if ($i === 0) {
       echo "<div class=\"group\">";
     }
 
+    $title = $professor->title ?
+      $professor->title->desc : $professor->personalDetails->title->desc;
+    $names = $professor->personalDetails->formattedNames();
+
     echo "<div class=\"name\">
-      PREFIJO TAL. AUTORIDAD TAL $authority
-      <br>
-      TITULO TAL
+      $title $names
     </div>";
 
     if ($i === 1) {

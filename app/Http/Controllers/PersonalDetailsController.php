@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\PersonalDetailsRequest;
 use App\PersonalDetail;
+use App\Title;
 use App\User;
 use Flash;
 use Redirect;
@@ -29,9 +30,10 @@ class PersonalDetailsController extends Controller
      */
     public function create($id)
     {
-        $user = User::findOrFail($id);
+        $user   = User::findOrFail($id);
+        $titles = Title::pluck('desc', 'id');
 
-        return View::make('personalDetails.forms.create', compact('user'));
+        return View::make('personalDetails.forms.create', compact('user', 'titles'));
     }
 
     /**
@@ -68,8 +70,9 @@ class PersonalDetailsController extends Controller
     public function edit($id)
     {
         $details = PersonalDetail::findOrFail($id);
+        $titles  = Title::pluck('desc', 'id');
 
-        return View::make('personalDetails.forms.edit', compact('details'));
+        return View::make('personalDetails.forms.edit', compact('details', 'titles'));
     }
 
     /**

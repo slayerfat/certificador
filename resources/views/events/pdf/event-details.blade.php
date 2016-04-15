@@ -4,7 +4,7 @@
       Asistió a la jornada de
     </h2>
 
-    <h2 class="name">@{{ JORNADA TAL }}</h2>
-    <h2 class="direction">@{{ DIRECCION TAL }}</h2>
+    <h2 class="name">{{ $event->name }}</h2>
+    <h2 class="direction">{{ $event->location }}</h2>
   </div>
 </div>

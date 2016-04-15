@@ -6,15 +6,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('/pdf', function () {
-    $pdf = App::make('dompdf.wrapper');
-
-    $pdf->loadView('events.pdf.CUFM');
-    $pdf->setOrientation('landscape');
-
-    return $pdf->stream();
-});
-
 Route::get('/view', function () {
     return view('events.pdf.CUFM');
 });
@@ -247,6 +238,17 @@ Route::group(['middleware' => ['web']], function () {
             'as'   => 'events.destroyAttendant',
             'uses' => 'EventsController@destroyAttendant',
         ]
+    );
+
+    // Certificados
+    Route::get(
+        '/eventos/pdf/{event}',
+        ['as' => 'events.indexPdf', 'uses' => 'EventsController@indexPdf']
+    );
+
+    Route::get(
+        '/eventos/pdf/{attendant}/{event}',
+        ['as' => 'events.showPdf', 'uses' => 'EventsController@showPdf']
     );
 
     // InstitutesProfessors

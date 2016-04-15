@@ -6,6 +6,13 @@
 </div>
 
 <div class="form-group">
+  {!! Form::label('info', 'Información adicional:', ['class' => 'col-md-2 control-label']) !!}
+  <div class="col-md-10">
+    {!! Form::text('info', null, ['class' => 'form-control']) !!}
+  </div>
+</div>
+
+<div class="form-group">
   {!! Form::label('institute_id', 'Instituto Relacionado:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
     {!! Form::select('institute_id', $institutes, null, ['class' => 'form-control']) !!}
@@ -21,6 +28,13 @@
   {!! Form::label('date', 'Fecha:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-4">
     {!! Form::input('text', 'date', null, ['class' => 'form-control', 'data-date-format' => 'yyyy-mm-dd']) !!}
+  </div>
+</div>
+
+<div class="form-group">
+  {!! Form::label('location', 'Locación:', ['class' => 'col-md-2 control-label']) !!}
+  <div class="col-md-10">
+    {!! Form::text('location', null, ['class' => 'form-control']) !!}
   </div>
 </div>
 
