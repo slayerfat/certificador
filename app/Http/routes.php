@@ -199,6 +199,22 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'events.destroy', 'uses' => 'EventsController@destroy']
     );
 
+    // Asignar profesores a eventos
+    Route::get(
+        '/institutos-profesores/crear-prof-evento/{id}',
+        [
+            'as'   => 'events.createProfessors',
+            'uses' => 'EventsController@createProfessors',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-prof-evento/{id}',
+        [
+            'as'   => 'events.storeProfessors',
+            'uses' => 'EventsController@storeProfessors',
+        ]
+    );
+
     // InstitutesProfessors
     // Desde instituto a profesor (LEAD)
     Route::get(

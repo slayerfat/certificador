@@ -29,6 +29,13 @@
 
         <hr>
 
+        <a href="{{ route('events.createProfessors', $event->id) }}"
+           class="btn btn-default">
+          <i class="fa fa-btn fa-plus"></i>Asignar Profesores
+        </a>
+
+        <hr>
+
         <h3>Contenido:</h3>
         {!! $event->content !!}
       </div>
@@ -36,11 +43,11 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h2>Información relacionada</h2>
+        <h2>Profesores involucrados</h2>
         <table
           id="tabla"
           data-toggle="table"
-          data-search="true"
+          data-search="false"
           data-pagination="true"
           data-page-list="[10, 25, 50, 100]"
           data-show-toggle="true"
@@ -73,6 +80,83 @@
           </th>
           </thead>
           <tbody>
+          @foreach ($event->professors as $professor)
+            <tr>
+              <td></td>
+              <td>
+                {{ $professor->personalDetails->user->name }}
+              </td>
+              <td>
+                {{ $professor->personalDetails->user->email }}
+              </td>
+              <td>
+                {{ $professor->personalDetails->first_name }}
+              </td>
+              <td>
+                {{ $professor->personalDetails->first_surname }}
+              </td>
+              <td>
+                {{ $professor->title->desc }}
+              </td>
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Participantes</h2>
+        <table
+          id="tabla"
+          data-toggle="table"
+          data-search="true"
+          data-pagination="true"
+          data-page-list="[10, 25, 50, 100]"
+          data-show-toggle="true"
+          data-show-columns="true"
+          data-click-to-select="true"
+          data-maintain-selected="true"
+          data-sort-name="first_name"
+        >
+          <thead>
+          <th data-field="operate" data-formatter="operateFormatter"
+              data-events="operateEvents">Ver
+          </th>
+          <th data-field="resource" data-sortable="true" data-switchable="true">
+            Seudónimo
+          </th>
+          <th data-field="email" data-sortable="true" data-switchable="true">
+            Correo Electrónico
+          </th>
+          <th data-field="first_name" data-sortable="true"
+              data-switchable="false">
+            Primer Nombre
+          </th>
+          <th data-field="first_surname" data-sortable="true"
+              data-switchable="false">
+            Primer Apellido
+          </th>
+          </thead>
+          <tbody>
+          @foreach ($event->attendants as $attendant)
+            <tr>
+              <td></td>
+              <td>
+                {{ $attendant->user->name }}
+              </td>
+              <td>
+                {{ $attendant->user->email }}
+              </td>
+              <td>
+                {{ $attendant->first_name }}
+              </td>
+              <td>
+                {{ $attendant->first_surname }}
+              </td>
+            </tr>
+          @endforeach
           </tbody>
         </table>
       </div>
