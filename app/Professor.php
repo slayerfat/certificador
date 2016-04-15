@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\PersonalDetail $personalDetails
  * @property-read \App\Title $title
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Institute[] $institutes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Event[] $events
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor whereLeads($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Professor wherePersonalDetailId($value)
@@ -68,5 +69,13 @@ class Professor extends Model
     public function institutes()
     {
         return $this->belongsToMany(Institute::class)->withPivot('leads', 'position');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
     }
 }

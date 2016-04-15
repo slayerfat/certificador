@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\Institute $institute
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PersonalDetail[] $attendants
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Professor[] $professors
  * @method static \Illuminate\Database\Query\Builder|\App\Event whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Event whereInstituteId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Event whereName($value)
@@ -91,8 +92,16 @@ class Event extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
      */
-    public function users()
+    public function attendants()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(PersonalDetail::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
+     */
+    public function professors()
+    {
+        return $this->belongsToMany(Professor::class);
     }
 }

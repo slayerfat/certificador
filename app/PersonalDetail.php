@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property-read \App\User $user
  * @property-read \App\Professor $professor
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Event[] $events
  * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereFirstName($value)
@@ -102,6 +103,14 @@ class PersonalDetail extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany|\Illuminate\Database\Query\Builder
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
     }
 
     /**
