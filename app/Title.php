@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Professor[] $professors
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PersonalDetail[] $personalDetails
  * @method static \Illuminate\Database\Query\Builder|\App\Title whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Title whereDesc($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Title whereCreatedAt($value)
@@ -56,5 +57,13 @@ class Title extends Model
     public function professors()
     {
         return $this->hasMany(Professor::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
+     */
+    public function personalDetails()
+    {
+        return $this->hasMany(PersonalDetail::class);
     }
 }

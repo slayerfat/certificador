@@ -16,6 +16,8 @@ class CreatePersonalDetailsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedInteger('title_id');
+            $table->foreign('title_id')->references('id')->on('titles');
             $table->string('first_name', 20);
             $table->string('last_name', 20)->nullable();
             $table->string('first_surname', 20);

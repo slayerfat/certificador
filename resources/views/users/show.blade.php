@@ -33,6 +33,8 @@
         <h2>
           @if ($user->personalDetails && $user->personalDetails->professor)
             {{ $user->personalDetails->professor->title->desc }}
+          @else
+            {{ $user->personalDetails->title->desc }}
           @endif
           {{$user->personalDetails->formattedNames(true)}}
         </h2>
