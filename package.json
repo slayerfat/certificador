@@ -10,6 +10,7 @@
     "bootstrap3-wysihtml5-bower": "^0.3.3",
     "font-awesome": "^4.5.0",
     "jquery": "^2.2.0",
-    "laravel-elixir": "^4.0.0"
+    "laravel-elixir": "^4.0.0",
+    "select2": "^4.0.2"
   }
 }

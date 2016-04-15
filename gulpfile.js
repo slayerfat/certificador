@@ -7,6 +7,7 @@ var paths = {
     'fontAwesome': './node_modules/font-awesome/',
     'datepicker': './node_modules/bootstrap-datepicker/',
     'bootTable': './node_modules/bootstrap-table/',
+    'select2': './node_modules/select2/',
     'wysihtml5': './node_modules/bootstrap3-wysihtml5-bower/'
 };
 
@@ -28,6 +29,11 @@ elixir(function (mix) {
         .copy(paths.wysihtml5 + 'dist/bootstrap3-wysihtml5.min.css', paths.public + '/css/')
         .copy(paths.wysihtml5 + 'dist/bootstrap3-wysihtml5.all.min.js', paths.public + '/js/')
         .copy(paths.wysihtml5 + 'dist/locales/bootstrap-wysihtml5.es-ES.js', paths.public + '/js/')
+
+        // select2
+        .copy(paths.select2 + 'dist/css/select2.min.css', paths.public + '/css/')
+        .copy(paths.select2 + 'dist/js/select2.min.js', paths.public + '/js/')
+        .copy(paths.select2 + 'dist/js/i18n/es.js', paths.public + '/js/select2-es.js')
 
         // bootstrap-table
         .copy(paths.bootTable + 'src/bootstrap-table.css', paths.public + '/css/')
