@@ -201,14 +201,14 @@ Route::group(['middleware' => ['web']], function () {
 
     // Asignar profesores a eventos
     Route::get(
-        '/institutos-profesores/crear-profesores-evento/{id}',
+        '/eventos/crear-profesores/{id}',
         [
             'as'   => 'events.createProfessors',
             'uses' => 'EventsController@createProfessors',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-profesores-evento/{id}',
+        '/eventos/crear-profesores/{id}',
         [
             'as'   => 'events.storeProfessors',
             'uses' => 'EventsController@storeProfessors',
@@ -217,14 +217,14 @@ Route::group(['middleware' => ['web']], function () {
 
     // asignar participantes a evento
     Route::get(
-        '/institutos-profesores/crear-participantes-evento/{id}',
+        '/eventos/crear-participantes/{id}',
         [
             'as'   => 'events.createAttendants',
             'uses' => 'EventsController@createAttendants',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-participantes-evento/{id}',
+        '/eventos/crear-participantes/{id}',
         [
             'as'   => 'events.storeAttendants',
             'uses' => 'EventsController@storeAttendants',
@@ -233,7 +233,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Elimina profesor de evento
     Route::delete(
-        '/institutos-profesores/eliminar-profesor-evento/{professor}/{event}',
+        '/eventos/eliminar-profesor/{professor}/{event}',
         [
             'as'   => 'events.destroyProfessor',
             'uses' => 'EventsController@destroyProfessor',
@@ -242,7 +242,7 @@ Route::group(['middleware' => ['web']], function () {
 
     // Elimina participante de evento
     Route::delete(
-        '/institutos-profesores/eliminar-participante-evento/{professor}/{event}',
+        '/eventos/eliminar-participante/{professor}/{event}',
         [
             'as'   => 'events.destroyAttendant',
             'uses' => 'EventsController@destroyAttendant',
