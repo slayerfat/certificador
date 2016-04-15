@@ -201,17 +201,51 @@ Route::group(['middleware' => ['web']], function () {
 
     // Asignar profesores a eventos
     Route::get(
-        '/institutos-profesores/crear-prof-evento/{id}',
+        '/institutos-profesores/crear-profesores-evento/{id}',
         [
             'as'   => 'events.createProfessors',
             'uses' => 'EventsController@createProfessors',
         ]
     );
     Route::post(
-        '/institutos-profesores/crear-prof-evento/{id}',
+        '/institutos-profesores/crear-profesores-evento/{id}',
         [
             'as'   => 'events.storeProfessors',
             'uses' => 'EventsController@storeProfessors',
+        ]
+    );
+
+    // asignar participantes a evento
+    Route::get(
+        '/institutos-profesores/crear-participantes-evento/{id}',
+        [
+            'as'   => 'events.createAttendants',
+            'uses' => 'EventsController@createAttendants',
+        ]
+    );
+    Route::post(
+        '/institutos-profesores/crear-participantes-evento/{id}',
+        [
+            'as'   => 'events.storeAttendants',
+            'uses' => 'EventsController@storeAttendants',
+        ]
+    );
+
+    // Elimina profesor de evento
+    Route::delete(
+        '/institutos-profesores/eliminar-profesor-evento/{professor}/{event}',
+        [
+            'as'   => 'events.destroyProfessor',
+            'uses' => 'EventsController@destroyProfessor',
+        ]
+    );
+
+    // Elimina participante de evento
+    Route::delete(
+        '/institutos-profesores/eliminar-participante-evento/{professor}/{event}',
+        [
+            'as'   => 'events.destroyAttendant',
+            'uses' => 'EventsController@destroyAttendant',
         ]
     );
 

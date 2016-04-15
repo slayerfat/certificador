@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Http\Requests;
+use App\Http\Requests\EventAttendantRequest;
 use App\Http\Requests\EventProfessorRequest;
 use App\Http\Requests\EventRequest;
 use App\Institute;
+use App\PersonalDetail;
 use App\Professor;
 use Flash;
 use Redirect;
@@ -107,23 +109,77 @@ class EventsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
+    public function createAttendants($id)
+    {
+        /** @var Event $event */
+        $event      = Event::findOrFail($id);
+        $attendants = [];
+        $existing   = $event->attendants()->pluck('id');
+
+        PersonalDetail::whereNotIn('id', $existing)->each(
+            function (PersonalDetail $attendant) use (&$attendants) {
+                $surname = $attendant->first_surname;
+                $name    = $attendant->first_name;
+                $ci      = $attendant->ci;
+                $data    = "{$surname}, {$name}. {$ci}";
+
+                $attendants[$attendant->id] = $data;
+            }
+        );
+
+        if (!$attendants) {
+            Flash::error('No hay Participantes disponibles para asignar');
+
+            return Redirect::back();
+        }
+
+        return View::make(
+            'events.forms.createAttendants',
+            compact('event', 'attendants')
+        );
+    }
+
+    /**
+     * Guarda los profesores a ser asignados a un evento.
+     *
+     * @param int $id
+     * @param \App\Http\Requests\EventAttendantRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeAttendants($id, EventAttendantRequest $request)
+    {
+        /** @var Event $event */
+        $event = Event::findOrFail($id);
+        $event->attendants()->attach($request->input('attendants'));
+
+        Flash::success('Evento actualizado correctamente.');
+
+        return Redirect::route('events.show', $event->id);
+    }
+
+    /**
+     * Genera el formulario para insertar profesores al evento.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
     public function createProfessors($id)
     {
+        /** @var Event $event */
         $event      = Event::findOrFail($id);
         $professors = [];
+        $existing   = $event->professors()->pluck('id');
 
-        Professor::all()
-            ->load('personalDetails')
-            ->each(
-                function (Professor $professor) use (&$professors) {
-                    $surname = $professor->personalDetails->first_surname;
-                    $name    = $professor->personalDetails->first_name;
-                    $ci      = $professor->personalDetails->ci;
-                    $data    = "{$surname}, {$name}. {$ci}";
+        Professor::whereNotIn('id', $existing)->with('personalDetails')->each(
+            function (Professor $professor) use (&$professors) {
+                $surname = $professor->personalDetails->first_surname;
+                $name    = $professor->personalDetails->first_name;
+                $ci      = $professor->personalDetails->ci;
+                $data    = "{$surname}, {$name}. {$ci}";
 
-                    $professors[$professor->id] = $data;
-                }
-            );
+                $professors[$professor->id] = $data;
+            }
+        );
 
         if (!$professors) {
             Flash::error('No hay Profesores disponibles para asignar');
@@ -131,7 +187,10 @@ class EventsController extends Controller
             return Redirect::back();
         }
 
-        return View::make('events.forms.createProfessors', compact('event', 'professors'));
+        return View::make(
+            'events.forms.createProfessors',
+            compact('event', 'professors')
+        );
     }
 
     /**
@@ -148,6 +207,42 @@ class EventsController extends Controller
         $event->professors()->attach($request->input('professors'));
 
         Flash::success('Evento actualizado correctamente.');
+
+        return Redirect::route('events.show', $event->id);
+    }
+
+    /**
+     * Elimina un profesor de un evento
+     *
+     * @param int $professorId
+     * @param int $eventId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyProfessor($professorId, $eventId)
+    {
+        /** @var Event $event */
+        $event = Event::findOrFail($eventId);
+        $event->professors()->detach([$professorId]);
+
+        Flash::success('Profesor eliminado correctamente.');
+
+        return Redirect::route('events.show', $event->id);
+    }
+
+    /**
+     * Elimina un profesor de un evento
+     *
+     * @param int $attendantId
+     * @param int $eventId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroyAttendant($attendantId, $eventId)
+    {
+        /** @var Event $event */
+        $event = Event::findOrFail($eventId);
+        $event->attendants()->detach([$attendantId]);
+
+        Flash::success('Participante eliminado correctamente.');
 
         return Redirect::route('events.show', $event->id);
     }

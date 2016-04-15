@@ -34,7 +34,12 @@
           <i class="fa fa-btn fa-plus"></i>Asignar Profesores
         </a>
 
-        <hr>
+          <a href="{{ route('events.createAttendants', $event->id) }}"
+             class="btn btn-default">
+            <i class="fa fa-btn fa-plus"></i>Asignar Participantes
+          </a>
+
+          <hr>
 
         <h3>Contenido:</h3>
         {!! $event->content !!}
@@ -78,6 +83,10 @@
               data-switchable="false">
             Título
           </th>
+          <th data-field="actions" data-sortable="false"
+              data-switchable="true">
+            Acciones
+          </th>
           </thead>
           <tbody>
           @foreach ($event->professors as $professor)
@@ -97,6 +106,14 @@
               </td>
               <td>
                 {{ $professor->title->desc }}
+              </td>
+              <td>
+                <a href="#" title="Eliminar" class="professor-action-delete"
+                   data-id="{{ $professor->id }}">
+                  <i class="fa fa-times text-danger"></i>
+                </a>
+                {!! Form::open(['route' => ['events.destroyProfessor', $professor->id, $event->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
+                {!! Form::close() !!}
               </td>
             </tr>
           @endforeach
@@ -138,6 +155,10 @@
               data-switchable="false">
             Primer Apellido
           </th>
+          <th data-field="actions" data-sortable="false"
+              data-switchable="true">
+            Acciones
+          </th>
           </thead>
           <tbody>
           @foreach ($event->attendants as $attendant)
@@ -154,6 +175,14 @@
               </td>
               <td>
                 {{ $attendant->first_surname }}
+              </td>
+              <td>
+                <a href="#" title="Eliminar" class="attendant-action-delete"
+                   data-id="{{ $attendant->id }}">
+                  <i class="fa fa-times text-danger"></i>
+                </a>
+                {!! Form::open(['route' => ['events.destroyAttendant', $attendant->id, $event->id], 'method' => 'DELETE', 'id' => "attendant-delete-$attendant->id"]) !!}
+                {!! Form::close() !!}
               </td>
             </tr>
           @endforeach
@@ -175,5 +204,27 @@
   <script src="{!! asset('js/initBootstrapTable.js') !!}"></script>
   <script type="text/javascript">
     initBootstrapTable("{!! route('users.show', 'no-data') !!}")
+  </script>
+
+  <script>
+    $('document').ready(function () {
+      $('.professor-action-delete').click(function (event) {
+        event.preventDefault();
+        var id = $(this).data('id');
+
+        if (confirm('¿Está seguro que desea eliminar a este Profesor?')) {
+          $('#professor-delete-' + id).submit();
+        }
+      });
+
+      $('.attendant-action-delete').click(function (event) {
+        event.preventDefault();
+        var id = $(this).data('id');
+
+        if (confirm('¿Está seguro que desea eliminar a este Participante?')) {
+          $('#attendant-delete-' + id).submit();
+        }
+      });
+    });
   </script>
 @stop
