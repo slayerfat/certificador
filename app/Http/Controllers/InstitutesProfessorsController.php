@@ -15,6 +15,15 @@ class InstitutesProfessorsController extends Controller
 {
 
     /**
+     * Create a new controller instance.
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Añade un instituto a un profesor como lider del mismo.
      *
      * @param int $id
