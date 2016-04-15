@@ -1,15 +1,19 @@
 @extends('layouts.pdf.master')
 
 @section('content')
-  <div class="pdf-body"
-       style="background-image: url('{{asset("images/cufm-logos.jpg")}}')">
-    {{--Usuario Beneficiado--}}
-    @include('events.pdf.user')
-    @include('events.pdf.event-details')
+  <div>
+    <div class="img-background">
+      <img src="{{ asset('images/cufm-logos-ajustado.jpg') }}" class="background">
+    </div>
+    <div class="text" style="position: absolute; top: 0;">
+      {{--Usuario Beneficiado--}}
+      @include('events.pdf.user')
+      @include('events.pdf.event-details')
 
-    {{--Autoridades--}}
-    @include('events.pdf.auth')
-    @include('layouts.pdf.footers.CUFM-footer')
+      {{--Autoridades--}}
+      @include('events.pdf.auth')
+      @include('layouts.pdf.footers.CUFM-footer')
+    </div>
   </div>
 
   <div class="page-break"></div>

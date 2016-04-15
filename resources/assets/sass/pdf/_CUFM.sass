@@ -16,8 +16,21 @@
     background-color: #dedede
     height: 20px
 
+
+.img-background
+  position: absolute
+  bottom: 0
+
+.text
+  position: absolute
+  top: 0
+
+// pagina de 1122x793
 .pdf-body
-  background: no-repeat center
+  background: no-repeat
+  //position: fixed
+  //bottom: 0
+  //right: 0
 
 .pdf-user
   font-weight: bold
@@ -25,7 +38,8 @@
 
   // determina el tamaño minimo del elemento
   // dentro del pdf para que no haga clipping
-  height: 300px
+  height: 200px
+  padding-top: 110px
 
   .pre
     font-weight: normal
@@ -38,7 +52,7 @@
 
   // determina el tamaño minimo del elemento
   // dentro del pdf para que no haga clipping
-  height: 300px
+  height: 320px
 
   .pre
     font-weight: normal
@@ -50,6 +64,8 @@
     @include make-xs-column(12)
 
 .pdf-authorities
+  font-size: 1.4em
+
   .group
     height: 100px
 
@@ -58,12 +74,17 @@
     height: 100px
     text-align: center
 
+  .single
+    text-align: center
+
 .footer
   text-align: center
+  font-size: 1.3em
 
 #details
   @include make-xs-column(12)
   font-family: $font-family-base
+  padding-left: 50px
 
   .title
     text-align: center

@@ -12,9 +12,19 @@
       $professor->title->desc : $professor->personalDetails->title->desc;
     $names = $professor->personalDetails->formattedNames();
 
-    echo "<div class=\"name\">
-      $title $names
-    </div>";
+    if ($event->professors->count() == 1) {
+      echo "<div class=\"single\">
+        &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
+        <br>
+        $title $names
+      </div>";
+    } else {
+      echo "<div class=\"name\">
+        &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
+        <br>
+        $title $names
+      </div>";
+    }
 
     if ($i === 1) {
       $i = 0;

@@ -1,1 +1,1 @@
-<div class="footer">Caracas, {{ Date::now()->format('l j F') }} de {{ Date::now()->format('Y') }}</div>
+<div class="footer">Caracas, {{ Date::parse($event->date)->format('l j F \d\e Y') }}</div>
