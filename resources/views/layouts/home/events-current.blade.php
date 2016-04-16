@@ -1,33 +1,34 @@
-@if ($user->personalDetails->events()->active()->get()->isEmpty() && $user->personalDetails->professor->events()->active()->get()->isEmpty())
+<?php
+$isPersonalEmpty = $user
+  ->personalDetails
+  ->events()
+  ->active()
+  ->get()
+  ->isEmpty();
+
+$isProfessorEmpty = $user
+  ->personalDetails
+  ->professor
+  ->events()
+  ->active()
+  ->get()
+  ->isEmpty();
+?>
+@if ($isPersonalEmpty && $isProfessorEmpty)
   Ud. no esta relacionado a ningún evento por venir.
 @else
-  @unless ($user->personalDetails->professor->events()->active()->get()->isEmpty())
+  @unless ($isProfessorEmpty)
     Eventos relacionados en los que Ud. participa como Profesor/Ponente u otro:
     @foreach ($user->personalDetails->professor->events()->active()->get() as $event)
-      <p>
-        {{ link_to_route('events.show', $event->name, $event->id) }},
-        {{ Date::parse($event->date)->format('l j F \d\e Y') }},
-        {{ Date::parse($event->date)->diffForHumans() }}.
-        relacionado con
-        {{ link_to_route('events.show', $event->institute->name, $event->institute->id) }}
-        .
-      </p>
+      @include('layouts.home.event-partial', ['event' => $event])
     @endforeach
   @endunless
 
-  @unless ($user->personalDetails->events()->active()->get()->isEmpty())
+  @unless ($isPersonalEmpty)
     Eventos en los que Ud. esta relacionado como participante:
     @foreach ($user->personalDetails->events()->active()->get() as $event)
       <p>
-        {{ link_to_route('events.show', $event->name, $event->id) }},
-        {{ Date::parse($event->date)->format('l j F \d\e Y') }},
-        {{ Date::parse($event->date)->diffForHumans() }}.
-        relacionado con
-        {{ link_to_route('events.show', $event->institute->name, $event->institute->id) }}
-        .
-        @if ($event->pivot->approved)
-          <span class="text-danger">Ud. no esta aprobado para este evento</span>
-        @endif
+        @include('layouts.home.event-partial', ['event' => $event, 'approved' => true])
       </p>
     @endforeach
   @endunless
