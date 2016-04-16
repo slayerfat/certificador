@@ -8,21 +8,35 @@
       echo "<div class=\"group\">";
     }
 
-    $title = $professor->title ?
+    $title     = $professor->title ?
       $professor->title->desc : $professor->personalDetails->title->desc;
-    $names = $professor->personalDetails->formattedNames();
+    $names     = $professor->personalDetails->first_name . " " .
+      $professor->personalDetails->first_surname;
+    $institute = $professor->institutes()->whereId($event->institute->id)->first();
+
+    if ($institute) {
+      $position = $institute->pivot->position;
+    } elseif ($professor->institutes->isEmpty()) {
+      $position = null;
+    } else {
+      $position = $professor->institutes->random()->pivot->position;
+    }
 
     if ($event->professors->count() == 1) {
       echo "<div class=\"single\">
         &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
         <br>
         $title $names
+        <br>
+        <span class=\"position\">$position</span>
       </div>";
     } else {
       echo "<div class=\"name\">
         &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
         <br>
         $title $names
+        <br>
+        <span class=\"position\">$position</span>
       </div>";
     }
 

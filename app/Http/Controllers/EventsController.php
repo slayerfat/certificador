@@ -266,6 +266,7 @@ class EventsController extends Controller
         $pdf->loadView('events.pdf.CUFM', compact('attendants', 'event'));
         $pdf->setOrientation('landscape');
 
+        //return view('events.pdf.CUFM', compact('attendants', 'event'));
         return $pdf->stream();
     }
 

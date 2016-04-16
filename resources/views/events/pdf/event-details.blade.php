@@ -1,10 +1,10 @@
 <div class="pdf-event">
   <div class="details">
-    <h2 class="pre">
+    <div class="pre">
       Asistió a la jornada de
-    </h2>
+    </div>
 
-    <h2 class="name">{{ $event->name }}</h2>
-    <h2 class="direction">{{ $event->location }}</h2>
+    <div class="name">{{ $event->name }}</div>
+    <div class="direction">En la locación {{ $event->location }}</div>
   </div>
 </div>

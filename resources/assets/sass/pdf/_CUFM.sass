@@ -1,3 +1,5 @@
+$font: 4em
+
 #CUFM-header
   h1
     font-size: 2em
@@ -24,13 +26,12 @@
 .text
   position: absolute
   top: 0
+  margin: 0
+  padding: 0
 
 // pagina de 1122x793
 .pdf-body
   background: no-repeat
-  //position: fixed
-  //bottom: 0
-  //right: 0
 
 .pdf-user
   font-weight: bold
@@ -38,17 +39,29 @@
 
   // determina el tamaño minimo del elemento
   // dentro del pdf para que no haga clipping
-  height: 200px
+  height: 210px
   padding-top: 110px
 
   .pre
+    font-size: $font * 0.7
     font-weight: normal
 
   .details
     @include make-xs-column(12)
 
+    .user-full-name
+      font-size: $font
+      padding-top: $font * -0.1
+
+    .user-ci
+      font-size: $font * 0.7
+
 .pdf-event
   text-align: center
+  font-size: $font * 0.6
+
+  // ajusta el espacio superior de la cedula
+  padding-top: $font * -0.2
 
   // determina el tamaño minimo del elemento
   // dentro del pdf para que no haga clipping
@@ -63,8 +76,11 @@
   .details
     @include make-xs-column(12)
 
+    .direction
+      font-weight: normal
+
 .pdf-authorities
-  font-size: 1.4em
+  font-size: $font * 0.5
 
   .group
     height: 100px
@@ -73,18 +89,30 @@
     @include make-xs-column(6)
     height: 100px
     text-align: center
+    font-weight: bold
 
   .single
     text-align: center
 
+  .position
+    font-weight: normal
+    font-size: $font * 0.2
+
 .footer
+  position: absolute
+  left: 0
+  right: 0
+  bottom: 0.7em
+  margin-left: auto
+  margin-right: auto
   text-align: center
-  font-size: 1.3em
+  font-size: $font * 0.4
 
 #details
   @include make-xs-column(12)
   font-family: $font-family-base
   padding-left: 50px
+  font-size: $font * 0.3
 
   .title
     text-align: center

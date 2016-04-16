@@ -1,14 +1,12 @@
 <div class="pdf-user">
   <div class="details">
-    <h1 class="pre">
-      Certifican que
-      {{ $attendant->sex == 'm' ? 'el' : 'la' }}:
-    </h1>
+    <div class="pre">
+      Certifican que:
+    </div>
 
-    <h1 class="user-full-name">
-      {{ $attendant->title->desc }}
+    <div class="user-full-name">
       {{ $attendant->formattedNames() }}
-    </h1>
-    <h1 class="user-ci">C.I. {{ $attendant->ci }}</h1>
+    </div>
+    <div class="user-ci">C.I. {{ $attendant->ci }}</div>
   </div>
 </div>
