@@ -76,6 +76,6 @@ class Professor extends Model
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)->withPivot('position');
     }
 }

@@ -205,7 +205,9 @@ class EventsController extends Controller
     {
         /** @var Event $event */
         $event = Event::findOrFail($id);
-        $event->professors()->attach($request->input('professors'));
+        $event->professors()->attach($request->input('professors'), [
+            'position' => $request->input('position')
+        ]);
 
         Flash::success('Evento actualizado correctamente.');
 

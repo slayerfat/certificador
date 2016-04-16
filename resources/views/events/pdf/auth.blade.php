@@ -14,7 +14,9 @@
       $professor->personalDetails->first_surname;
     $institute = $professor->institutes()->whereId($event->institute->id)->first();
 
-    if ($institute) {
+    if ($professor->pivot) {
+      $position = $professor->pivot->position;
+    } elseif ($institute) {
       $position = $institute->pivot->position;
     } elseif ($professor->institutes->isEmpty()) {
       $position = null;

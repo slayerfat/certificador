@@ -12,17 +12,13 @@ class CreateEventProfessorTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'event_professor',
-            function (Blueprint $table) {
-                $table->unsignedInteger('event_id')->nullable();
-                $table->foreign('event_id')->references('id')->on('events');
-                $table->unsignedInteger('professor_id')->nullable();
-                $table->foreign('professor_id')->references('id')->on(
-                    'professors'
-                );
-            }
-        );
+        Schema::create('event_professor', function (Blueprint $table) {
+            $table->unsignedInteger('event_id')->nullable();
+            $table->foreign('event_id')->references('id')->on('events');
+            $table->unsignedInteger('professor_id')->nullable();
+            $table->foreign('professor_id')->references('id')->on('professors');
+            $table->string('position')->nullable();
+        });
     }
 
     /**
