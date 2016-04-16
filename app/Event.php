@@ -28,6 +28,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Event whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Event whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $location
+ * @property string $info
+ * @property string $position
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereLocation($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event whereInfo($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event wherePosition($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Event active()
+ * @method static \Illuminate\Database\Query\Builder|\App\Event inactive()
  */
 class Event extends Model
 {
@@ -84,6 +92,28 @@ class Event extends Model
     }
 
     /**
+     * Selecciona los eventos actualmente activos en el sistema.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('date', '>=', Carbon::now());
+    }
+
+    /**
+     * Selecciona los eventos actualmente inactivos en el sistema.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInactive($query)
+    {
+        return $query->where('date', '<=', Carbon::now());
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Query\Builder
      */
     public function institute()
@@ -96,7 +126,7 @@ class Event extends Model
      */
     public function attendants()
     {
-        return $this->belongsToMany(PersonalDetail::class);
+        return $this->belongsToMany(PersonalDetail::class)->withPivot('approved');
     }
 
     /**

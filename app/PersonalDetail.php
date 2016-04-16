@@ -37,6 +37,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property integer $title_id
+ * @property string $sex
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereTitleId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\PersonalDetail whereSex($value)
  */
 class PersonalDetail extends Model
 {
@@ -113,7 +117,7 @@ class PersonalDetail extends Model
      */
     public function events()
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)->withPivot('approved');
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateEventPersonalDetailTable extends Migration
             $table->foreign('event_id')->references('id')->on('events');
             $table->unsignedInteger('personal_detail_id')->nullable();
             $table->foreign('personal_detail_id')->references('id')->on('personal_details');
+            $table->boolean('approved')->default(false);
         });
     }
 

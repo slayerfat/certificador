@@ -11,6 +11,7 @@ use App\Http\Requests\EventRequest;
 use App\Institute;
 use App\PersonalDetail;
 use App\Professor;
+use Auth;
 use Flash;
 use Redirect;
 use View;
@@ -151,9 +152,41 @@ class EventsController extends Controller
     {
         /** @var Event $event */
         $event = Event::findOrFail($id);
-        $event->attendants()->attach($request->input('attendants'));
+        $event->attendants()->attach($request->input('attendants'), [
+            'approved' => Auth::user()->admin,
+        ]);
 
         Flash::success('Evento actualizado correctamente.');
+
+        return Redirect::route('events.show', $event->id);
+    }
+
+    /**
+     * Guarda los profesores a ser asignados a un evento.
+     *
+     * @param int $attendantId
+     * @param int $eventId
+     * @return \Illuminate\Http\Response
+     */
+    public function approveAttendant($attendantId, $eventId)
+    {
+        if (!Auth::user()->admin) {
+            Flash::error('Ud. no tiene permisos para esta acción');
+
+            Auth::logout();
+
+            return Redirect::back();
+        }
+
+        /** @var PersonalDetail $attendant */
+        $attendant = PersonalDetail::findOrFail($attendantId);
+        $event     = $attendant->events()->where('id', $eventId)->first();
+
+        $event->attendants()->updateExistingPivot($attendantId, [
+            'approved' => true,
+        ]);
+
+        Flash::success('Participante actualizado correctamente.');
 
         return Redirect::route('events.show', $event->id);
     }
@@ -206,7 +239,7 @@ class EventsController extends Controller
         /** @var Event $event */
         $event = Event::findOrFail($id);
         $event->professors()->attach($request->input('professors'), [
-            'position' => $request->input('position')
+            'position' => $request->input('position'),
         ]);
 
         Flash::success('Evento actualizado correctamente.');
@@ -259,16 +292,22 @@ class EventsController extends Controller
      */
     public function showPdf($attendantId, $eventId)
     {
-        $attendant  = PersonalDetail::findOrFail($attendantId);
-        $event      = Event::findOrFail($eventId);
-        $attendants = collect()->push($attendant);
+        /** @var PersonalDetail $attendant */
+        $attendant = PersonalDetail::findOrFail($attendantId);
+        $event     = $attendant->events()->where('id', $eventId)->first();
 
-        $pdf = App::make('dompdf.wrapper');
+        if (!$event->pivot->approved) {
+            Flash::error('Este Participante no esta aprobado para estar en este evento.');
+
+            return Redirect::back();
+        }
+
+        $attendants = collect()->push($attendant);
+        $pdf        = App::make('dompdf.wrapper');
 
         $pdf->loadView('events.pdf.CUFM', compact('attendants', 'event'));
         $pdf->setOrientation('landscape');
 
-        //return view('events.pdf.CUFM', compact('attendants', 'event'));
         return $pdf->stream();
     }
 
@@ -276,7 +315,15 @@ class EventsController extends Controller
     {
         /** @var Event $event */
         $event      = Event::findOrFail($eventId);
-        $attendants = $event->attendants;
+        $attendants = $event->attendants()
+                            ->wherePivot('approved', '=', true)
+                            ->get();
+
+        if ($attendants->isEmpty()) {
+            Flash::error('No hay participantes asignados o aprobados para este evento.');
+
+            return Redirect::back();
+        }
 
         $pdf = App::make('dompdf.wrapper');
 

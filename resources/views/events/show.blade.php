@@ -186,11 +186,19 @@
                 {{ $attendant->first_surname }}
               </td>
               <td>
-                <a
-                  href="{{ route('events.showPdf', [$attendant->id, $event->id]) }}"
-                  title="Ver Certificado">
-                  <i class="fa fa-file-pdf-o"></i>
-                </a>
+                @if ($attendant->pivot->approved)
+                  <a
+                    href="{{ route('events.showPdf', [$attendant->id, $event->id]) }}"
+                    title="Ver Certificado">
+                    <i class="fa fa-file-pdf-o"></i>
+                  </a>
+                @else
+                  <a
+                    href="{{ route('events.approveAttendant', [$attendant->id, $event->id]) }}"
+                    title="Aprobar">
+                    <i class="fa fa-check"></i>
+                  </a>
+                @endif
                 <a href="#" title="Eliminar" class="attendant-action-delete"
                    data-id="{{ $attendant->id }}">
                   <i class="fa fa-times text-danger"></i>

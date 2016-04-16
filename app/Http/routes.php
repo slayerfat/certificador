@@ -240,6 +240,15 @@ Route::group(['middleware' => ['web']], function () {
         ]
     );
 
+    // Aprueba participante de evento
+    Route::get(
+        '/eventos/aprobar-participante/{attendant}/{event}',
+        [
+            'as'   => 'events.approveAttendant',
+            'uses' => 'EventsController@approveAttendant',
+        ]
+    );
+
     // Certificados
     Route::get(
         '/eventos/pdf/{event}',
