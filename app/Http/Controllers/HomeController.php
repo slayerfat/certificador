@@ -24,14 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $ids  = $user->personalDetails->events->pluck('id');
+        $user   = Auth::user();
+        $events = collect();
 
-        $events = Event::whereNotIn('id', $ids)
-                       ->active()
-                       ->latest()
-                       ->limit(5)
-                       ->get();
+        if ($user->personalDetails && $user->personalDetails->events) {
+            $ids = $user->personalDetails->events->pluck('id');
+
+            $events = Event::whereNotIn('id', $ids)
+                           ->active()
+                           ->latest()
+                           ->limit(5)
+                           ->get();
+        }
+
 
         $activeEvents = Event::active()->latest()->limit(5)->get();
 

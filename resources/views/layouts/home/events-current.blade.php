@@ -1,18 +1,22 @@
 <?php
-$isPersonalEmpty = $user
-  ->personalDetails
-  ->events()
-  ->active()
-  ->get()
-  ->isEmpty();
+if ($user->personalDetails && $user->personalDetails->events) {
+  $isPersonalEmpty = $user
+    ->personalDetails
+    ->events()
+    ->active()
+    ->get()
+    ->isEmpty();
 
-$isProfessorEmpty = $user
-  ->personalDetails
-  ->professor
-  ->events()
-  ->active()
-  ->get()
-  ->isEmpty();
+  $isProfessorEmpty = $user
+    ->personalDetails
+    ->professor
+    ->events()
+    ->active()
+    ->get()
+    ->isEmpty();
+} else {
+  $isProfessorEmpty = $isPersonalEmpty = true;
+}
 ?>
 @if ($isPersonalEmpty && $isProfessorEmpty)
   Ud. no esta relacionado a ningún evento por venir.

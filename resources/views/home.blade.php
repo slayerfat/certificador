@@ -23,8 +23,11 @@
           <div class="panel-heading">Información de administrador</div>
           <div class="panel-body">
             Existen actualmente
-            {{ $activeEvents->count() == 1 ? '1 Evento' : $activeEvents->count() . " Eventos" }}
-            :
+            {{
+            $activeEvents->count() == 1 ?
+            '1 Evento:' : $activeEvents->count() == 0 ?
+            'cero Eventos que requieran su atención.' : $activeEvents->count() . " Eventos:"
+            }}
             @foreach ($activeEvents as $event)
               @include('layouts.home.event-partial', ['event' => $event])
               <p>
@@ -45,6 +48,8 @@
                   {{ link_to_route('users.show', $personalDetails->formattedNames(), $personalDetails->user->name) }}
                 @endforeach
               @endif
+
+              <hr>
             @endforeach
           </div>
         </div>
