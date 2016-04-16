@@ -9,6 +9,9 @@
             'resource' => 'events',
             'id' => $event->id
           ])
+          <a href="{{ route('events.indexPdf', $event->id) }}" class="btn btn-default" id="event-pdf">
+            <i class="fa fa-btn fa-file-pdf-o"></i>Generar PDFs
+          </a>
         @endif
 
         <h1>
@@ -234,6 +237,12 @@
 
         if (confirm('¿Está seguro que desea eliminar a este Participante?')) {
           $('#attendant-delete-' + id).submit();
+        }
+      });
+
+      $('#event-pdf').click(function(event){
+        if(!confirm('Esta acción puede tardar varios minutos, ¿desea continuar?')) {
+          event.preventDefault();
         }
       });
     });

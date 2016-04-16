@@ -257,12 +257,13 @@ class EventsController extends Controller
      */
     public function showPdf($attendantId, $eventId)
     {
-        $attendant = PersonalDetail::findOrFail($attendantId);
-        $event = Event::findOrFail($eventId);
+        $attendant  = PersonalDetail::findOrFail($attendantId);
+        $event      = Event::findOrFail($eventId);
+        $attendants = collect()->push($attendant);
 
         $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadView('events.pdf.CUFM', compact('attendant', 'event'));
+        $pdf->loadView('events.pdf.CUFM', compact('attendants', 'event'));
         $pdf->setOrientation('landscape');
 
         return $pdf->stream();
@@ -270,9 +271,13 @@ class EventsController extends Controller
 
     public function indexPdf($eventId)
     {
+        /** @var Event $event */
+        $event      = Event::findOrFail($eventId);
+        $attendants = $event->attendants;
+
         $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadView('events.pdf.CUFM');
+        $pdf->loadView('events.pdf.CUFM', compact('attendants', 'event'));
         $pdf->setOrientation('landscape');
 
         return $pdf->stream();
