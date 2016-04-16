@@ -33,6 +33,8 @@ class HomeController extends Controller
                        ->limit(5)
                        ->get();
 
-        return view('home', compact('events', 'user'));
+        $activeEvents = Event::active()->latest()->limit(5)->get();
+
+        return view('home', compact('events', 'user', 'activeEvents'));
     }
 }
