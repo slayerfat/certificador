@@ -79,10 +79,13 @@ class UsersController extends Controller
      */
     public function show($id, PhoneParserInterface $phoneParser)
     {
-        $user = User::whereName($id)
-                    ->orWhere('id', $id)
-                    ->firstOrFail()
-                    ->load('personalDetails', 'personalDetails.professor');
+        $user = User::whereName($id)->first();
+
+        if (!$user) {
+            $user = User::findOrFail($id);
+        }
+
+        $user->load('personalDetails', 'personalDetails.professor');
 
         return View::make('users.show', compact('user', 'phoneParser'));
     }
