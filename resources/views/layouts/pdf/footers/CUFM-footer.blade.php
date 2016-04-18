@@ -1,1 +1,1 @@
-<div class="footer">Caracas, {{ Date::parse($event->date)->format('l j F \d\e Y') }}</div>
+<div id="footer">Caracas, {{ Date::parse($event->date)->format('l j F \d\e Y') }}</div>

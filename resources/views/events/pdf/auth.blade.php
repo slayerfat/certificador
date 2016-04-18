@@ -25,20 +25,23 @@
     }
 
     if ($event->professors->count() == 1) {
-      echo "<div class=\"single\">
+      echo "<div class=\"pdf-single\">
         &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
         <br>
         $title $names
         <br>
-        <span class=\"position\">$position</span>
+        <span class=\"pdf-position\">$position</span>
+      </div>
       </div>";
+      // 2 divs porque es solo un div por lo
+      // que el condicional $i == 1 nunca es verdadero
     } else {
-      echo "<div class=\"name\">
+      echo "<div class=\"pdf-name\">
         &#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;&#95;
         <br>
         $title $names
         <br>
-        <span class=\"position\">$position</span>
+        <span class=\"pdf-position\">$position</span>
       </div>";
     }
 
