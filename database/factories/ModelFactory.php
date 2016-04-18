@@ -80,7 +80,7 @@ $factory->define(App\Title::class, function (Faker\Generator $faker) {
 
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name'           => $faker->name,
+        'name'           => $faker->word,
         'email'          => $faker->email,
         'admin'          => false,
         'password'       => bcrypt(str_random(10)),
