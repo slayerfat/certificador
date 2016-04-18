@@ -8,6 +8,10 @@
           'resource' => 'users',
           'id' => $user->id
         ])
+      @elseif (Auth::user()->isOwnerOrAdmin($user->id))
+        <a href="{{ route("users.edit", $user->id) }}" class="btn btn-default">
+          <i class="fa fa-btn fa-edit"></i>Editar
+        </a>
       @endif
 
       {{-- user info --}}
@@ -93,6 +97,7 @@
           </h2>
         @endforeach
 
+        @if (Auth::user()->admin)
           <a
             href="{{ route("institutesProfessors.createLeadFromProfToInst", $user->personalDetails->professor->id) }}"
             class="btn btn-default">
@@ -103,6 +108,7 @@
             class="btn btn-default">
             <i class="fa fa-btn fa-plus"></i>Asignar a Institución
           </a>
+        @endif
       @endif
 
       @include('layouts.admins.basic-audit', [

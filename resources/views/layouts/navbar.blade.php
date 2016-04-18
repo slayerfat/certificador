@@ -20,7 +20,16 @@
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
       <!-- Left Side Of Navbar -->
       <ul class="nav navbar-nav">
-        <li><a href="{{ url('/home') }}">Inicio</a></li>
+        <li><a href="{{ route('home.index') }}">Inicio</a></li>
+      </ul>
+
+      <!-- Eventos/Jornadas/Cursos -->
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="{{ route('events.index') }}">
+            <i class="fa fa-btn fa-briefcase"></i>Eventos
+          </a>
+        </li>
       </ul>
 
       <!-- Mant -->
@@ -30,7 +39,7 @@
             <a href="#" class="dropdown-toggle"
                data-toggle="dropdown" role="button"
                aria-expanded="false">
-              <i class="fa fa-btn fa-wrench"></i> Mantenimiento <span
+              <i class="fa fa-btn fa-wrench"></i>Mantenimiento <span
                 class="caret"></span>
             </a>
 
@@ -54,13 +63,6 @@
               <li>
                 <a href="{{ route('professors.index') }}">
                   <i class="fa fa-btn fa-user-md"></i>Profesores
-                </a>
-              </li>
-
-              <!-- Eventos/Jornadas/Cursos -->
-              <li>
-                <a href="{{ route('events.index') }}">
-                  <i class="fa fa-btn fa-briefcase"></i>Eventos
                 </a>
               </li>
 

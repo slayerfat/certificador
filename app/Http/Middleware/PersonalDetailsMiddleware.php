@@ -18,7 +18,10 @@ class PersonalDetailsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::user()->isOwnerOrAdmin($request->route('userID'))) {
+        $id = $request->route('userID') ?
+            $request->route('userID') : $request->route('id');
+
+        if (!Auth::user()->isOwnerOrAdmin($id)) {
             Flash::error('Ud. no tiene permisos para esta acción.');
 
             return Redirect::back();
