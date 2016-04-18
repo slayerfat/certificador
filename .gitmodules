@@ -1,3 +1,3 @@
 [submodule "app/Slayerfat"]
 	path = app/Slayerfat
-	url = git@github.com:slayerfat/VzlaPhoneParser.git
+	url = git://github.com/slayerfat/VzlaPhoneParser
