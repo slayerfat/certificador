@@ -35,6 +35,11 @@ class HomeController extends Controller
                            ->latest()
                            ->limit(5)
                            ->get();
+        } elseif (!$user->personalDetails || !$user->personalDetails->events) {
+            $events = Event::active()
+                           ->latest()
+                           ->limit(5)
+                           ->get();
         }
 
 
