@@ -32,7 +32,7 @@ function makeCI()
 $factory->define(App\PersonalDetail::class, function (Faker\Generator $faker) {
     return [
         'user_id'       => factory(App\User::class)->create()->id,
-        'title_id'      => factory(App\Title::class)->create()->id,
+        'title_id'      => rand(1, 4),
         'sex'           => $faker->randomElement(['m', 'f']),
         'first_name'    => $faker->firstName,
         'last_name'     => $faker->firstName,
