@@ -19,6 +19,14 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->middleware('auth.notAdmin', [
+            'only' => [
+                'index',
+                'create',
+                'store',
+            ],
+        ]);
     }
 
     /**
@@ -72,9 +80,9 @@ class UsersController extends Controller
     public function show($id, PhoneParserInterface $phoneParser)
     {
         $user = User::whereName($id)
-            ->orWhere('id', $id)
-            ->firstOrFail()
-            ->load('personalDetails', 'personalDetails.professor');
+                    ->orWhere('id', $id)
+                    ->firstOrFail()
+                    ->load('personalDetails', 'personalDetails.professor');
 
         return View::make('users.show', compact('user', 'phoneParser'));
     }

@@ -7,6 +7,8 @@ use App\Http\Requests\ProfessorRequest;
 use App\PersonalDetail;
 use App\Professor;
 use App\Title;
+use Flash;
+use Gate;
 use Redirect;
 use View;
 
@@ -43,7 +45,14 @@ class ProfessorsController extends Controller
     public function create($id)
     {
         $details = PersonalDetail::findOrFail($id);
-        $titles  = Title::pluck('desc', 'id');
+
+        if (Gate::denies('createProfessor', $details)) {
+            Flash::error('Ud. no tiene permisos para esta acción.');
+
+            return Redirect::back();
+        }
+
+        $titles = Title::pluck('desc', 'id');
 
         return View::make(
             'professors.forms.create',
@@ -64,6 +73,12 @@ class ProfessorsController extends Controller
         /** @var PersonalDetail $details */
         $details = PersonalDetail::findOrFail($id);
 
+        if (Gate::denies('createProfessor', $details)) {
+            Flash::error('Ud. no tiene permisos para esta acción.');
+
+            return Redirect::back();
+        }
+
         $professor->title_id = $request->input('title_id');
         $details->professor()->save($professor);
 
@@ -79,7 +94,14 @@ class ProfessorsController extends Controller
     public function edit($id)
     {
         $professor = Professor::findOrFail($id);
-        $titles    = Title::pluck('desc', 'id');
+
+        if (Gate::denies('update', $professor)) {
+            Flash::error('Ud. no tiene permisos para esta acción.');
+
+            return Redirect::back();
+        }
+
+        $titles = Title::pluck('desc', 'id');
 
         return View::make(
             'professors.forms.edit',
@@ -97,7 +119,14 @@ class ProfessorsController extends Controller
     public function update(ProfessorRequest $request, $id)
     {
         /** @var Professor $professor */
-        $professor           = Professor::findOrFail($id)->load('personalDetails');
+        $professor = Professor::findOrFail($id)->load('personalDetails');
+
+        if (Gate::denies('update', $professor)) {
+            Flash::error('Ud. no tiene permisos para esta acción.');
+
+            return Redirect::back();
+        }
+
         $professor->title_id = $request->input('title_id');
         $professor->save();
 
