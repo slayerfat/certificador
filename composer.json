@@ -45,7 +45,6 @@
   },
   "scripts": {
     "compile": [
-      "./node_modules/.bin/npm install",
       "./node_modules/.bin/gulp --production"
     ],
     "post-root-package-install": [
