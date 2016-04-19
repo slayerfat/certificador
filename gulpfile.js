@@ -42,7 +42,8 @@ elixir(function (mix) {
         .copy('./resources/assets/js/bootstrap-table/initBootstrapTable.js', paths.public + '/js/')
         .scripts([
             paths.jQuery + "dist/jquery.js",
-            paths.bootstrap + "javascripts/bootstrap.js"
+            paths.bootstrap + "javascripts/bootstrap.js",
+            "deleteResourceFromAnchor.js"
         ])
         .version([
             'css/app.css',
