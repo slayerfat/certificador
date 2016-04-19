@@ -68,7 +68,7 @@ $factory->define(App\Institute::class, function (Faker\Generator $faker) {
 $factory->define(App\Professor::class, function () {
     return [
         'personal_detail_id' => factory(App\PersonalDetail::class)->create()->id,
-        'title_id'           => factory(App\Title::class)->create()->id,
+        'title_id'           => rand(1, 4),
     ];
 });
 
