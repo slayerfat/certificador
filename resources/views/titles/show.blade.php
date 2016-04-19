@@ -19,7 +19,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h2>Profesores relacionados</h2>
+        <h2>Usuarios relacionados</h2>
         <table
           id="tabla"
           data-toggle="table"
@@ -50,10 +50,6 @@
               data-switchable="false">
             Primer Apellido
           </th>
-          <th data-field="title" data-sortable="true"
-              data-switchable="false">
-            Título
-          </th>
           </thead>
           <tbody>
           @foreach ($title->professors as $professor)
@@ -63,7 +59,15 @@
               <td>{{ $professor->personalDetails->user->email }}</td>
               <td>{{ $professor->personalDetails->first_name }}</td>
               <td>{{ $professor->personalDetails->first_surname }}</td>
-              <td>{{ $professor->title->desc }}</td>
+            </tr>
+          @endforeach
+          @foreach ($title->personalDetails as $details)
+            <tr>
+              <td></td>
+              <td>{{ $details->user->name }}</td>
+              <td>{{ $details->user->email }}</td>
+              <td>{{ $details->first_name }}</td>
+              <td>{{ $details->first_surname }}</td>
             </tr>
           @endforeach
           </tbody>

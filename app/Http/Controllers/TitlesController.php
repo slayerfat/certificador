@@ -110,6 +110,14 @@ class TitlesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = Title::findOrFail($id);
+
+        $result = $this->destroyPrototype($title, 'delete', 'Titulo Descriptivo', 'Usuarios');
+
+        if ($result) {
+            return Redirect::route('titles.index');
+        }
+
+        return Redirect::route('titles.show', $id);
     }
 }
