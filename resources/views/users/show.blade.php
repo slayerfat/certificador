@@ -78,11 +78,19 @@
       @endif
 
       @if ($user->personalDetails && $user->personalDetails->professor)
-        <a
-          href="{{ route("professors.edit", $user->personalDetails->professor->id) }}"
-          class="btn btn-default">
-          <i class="fa fa-btn fa-edit"></i>Editar información Profesoral
-        </a>
+          @if (Auth::user()->isOwnerOrAdmin($user->id))
+            <a
+              href="{{ route("professors.edit", $user->personalDetails->professor->id) }}"
+              class="btn btn-default">
+              <i class="fa fa-btn fa-edit"></i>Editar información Profesoral
+            </a>
+            <a
+              href="#"
+              onclick="deleteResourceFromAnchor({{ $user->personalDetails->professor->id }})"
+              class="btn btn-danger">
+              <i class="fa fa-btn fa-times"></i>Eliminar información Profesoral
+            </a>
+          @endif
 
         @foreach ($user->personalDetails->professor->institutes as $institute)
           <h2>
@@ -110,6 +118,12 @@
           </a>
         @endif
       @endif
+
+        @if ($user->personalDetails && $user->personalDetails->professor)
+          {!! Form::open(['route' => ["professors.destroy", $user->personalDetails->professor->id], 'method' => 'DELETE', 'id' => $user->personalDetails->professor->id]) !!}
+
+          {!! Form::close() !!}
+        @endif
 
       @include('layouts.admins.basic-audit', [
         'model'   => $user,

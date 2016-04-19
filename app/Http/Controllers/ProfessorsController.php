@@ -144,6 +144,12 @@ class ProfessorsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var Professor $professor */
+        $professor = Professor::findOrFail($id);
+        $user      = $professor->personalDetails->user;
+
+        $this->destroyPrototype($professor, 'delete', 'Profesor');
+
+        return Redirect::route('users.show', $user->id);
     }
 }
