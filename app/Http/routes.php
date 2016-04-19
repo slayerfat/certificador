@@ -222,6 +222,15 @@ Route::group(['middleware' => ['web']], function () {
         ]
     );
 
+    // Asignar un participante a un evento (desde el participante)
+    Route::get(
+        '/eventos/crear-participante/{id}',
+        [
+            'as'   => 'events.createAttendantFromSelf',
+            'uses' => 'EventsController@createAttendantFromSelf',
+        ]
+    );
+
     // Elimina profesor de evento
     Route::delete(
         '/eventos/eliminar-profesor/{professor}/{event}',

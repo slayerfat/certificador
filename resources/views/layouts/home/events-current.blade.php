@@ -7,13 +7,17 @@ if ($user->personalDetails && $user->personalDetails->events) {
     ->get()
     ->isEmpty();
 
-  $isProfessorEmpty = $user
-    ->personalDetails
-    ->professor
-    ->events()
-    ->active()
-    ->get()
-    ->isEmpty();
+  if ($user->personalDetails->professor) {
+    $isProfessorEmpty = $user
+      ->personalDetails
+      ->professor
+      ->events()
+      ->active()
+      ->get()
+      ->isEmpty();
+  } else {
+    $isProfessorEmpty = true;
+  }
 } else {
   $isProfessorEmpty = $isPersonalEmpty = true;
 }

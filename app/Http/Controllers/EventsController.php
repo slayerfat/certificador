@@ -26,7 +26,9 @@ class EventsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('auth.notAdmin', ['except' => ['index', 'show']]);
+        $this->middleware('auth.notAdmin', [
+            'except' => ['index', 'show', 'createAttendantFromSelf', 'showPdf'],
+        ]);
     }
 
     /**
@@ -150,6 +152,35 @@ class EventsController extends Controller
             'events.forms.createAttendants',
             compact('event', 'attendants')
         );
+    }
+
+    /**
+     * Genera el formulario para insertar profesores al evento.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function createAttendantFromSelf($id)
+    {
+        /** @var Event $event */
+        $event = Event::findOrFail($id);
+        $user  = Auth::user();
+
+        if (!$user->personalDetails) {
+            Flash::error('Para poder participar debe Ud. poseer datos personales.');
+
+            return Redirect::back();
+        }
+
+        $event->attendants()->sync([
+            $user->personalDetails->id => [
+                'approved' => $user->admin,
+            ],
+        ]);
+
+        Flash::success('Participante añadido correctamente.');
+
+        return Redirect::route('events.show', $event->id);
     }
 
     /**
@@ -305,7 +336,14 @@ class EventsController extends Controller
     {
         /** @var PersonalDetail $attendant */
         $attendant = PersonalDetail::findOrFail($attendantId);
-        $event     = $attendant->events()->where('id', $eventId)->first();
+
+        if (!Auth::user()->isOwnerOrAdmin($attendant->user_id)) {
+            Flash::error('Ud. no tiene permisos para esta acción.');
+
+            return Redirect::back();
+        }
+
+        $event = $attendant->events()->where('id', $eventId)->first();
 
         if (!$event->pivot->approved) {
             Flash::error('Este Participante no esta aprobado para estar en este evento.');

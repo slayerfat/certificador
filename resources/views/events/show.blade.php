@@ -36,17 +36,7 @@
           {{ $event->hours === 1 ? 'Hora' : 'Horas' }} de duración
         </h3>
 
-        <hr>
-
-        <a href="{{ route('events.createProfessors', $event->id) }}"
-           class="btn btn-default">
-          <i class="fa fa-btn fa-plus"></i>Asignar Profesores
-        </a>
-
-        <a href="{{ route('events.createAttendants', $event->id) }}"
-           class="btn btn-default">
-          <i class="fa fa-btn fa-plus"></i>Asignar Participantes
-        </a>
+        @include('events.add-to-event')
 
         <hr>
 
@@ -92,10 +82,12 @@
               data-switchable="false">
             Título
           </th>
-          <th data-field="actions" data-sortable="false"
-              data-switchable="true">
-            Acciones
-          </th>
+          @if (Auth::user()->admin)
+            <th data-field="actions" data-sortable="false"
+                data-switchable="true">
+              Acciones
+            </th>
+          @endif
           </thead>
           <tbody>
           @foreach ($event->professors as $professor)
@@ -116,14 +108,16 @@
               <td>
                 {{ $professor->title->desc }}
               </td>
-              <td>
-                <a href="#" title="Eliminar" class="professor-action-delete"
-                   data-id="{{ $professor->id }}">
-                  <i class="fa fa-times text-danger"></i>
-                </a>
-                {!! Form::open(['route' => ['events.destroyProfessor', $professor->id, $event->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
-                {!! Form::close() !!}
-              </td>
+              @if (Auth::user()->admin)
+                <td>
+                  <a href="#" title="Eliminar" class="professor-action-delete"
+                     data-id="{{ $professor->id }}">
+                    <i class="fa fa-times text-danger"></i>
+                  </a>
+                  {!! Form::open(['route' => ['events.destroyProfessor', $professor->id, $event->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
+                  {!! Form::close() !!}
+                </td>
+              @endif
             </tr>
           @endforeach
           </tbody>
@@ -164,10 +158,12 @@
               data-switchable="false">
             Primer Apellido
           </th>
-          <th data-field="actions" data-sortable="false"
-              data-switchable="true">
-            Acciones
-          </th>
+          @if (Auth::user()->admin)
+            <th data-field="actions" data-sortable="false"
+                data-switchable="true">
+              Acciones
+            </th>
+          @endif
           </thead>
           <tbody>
           @foreach ($event->attendants as $attendant)
@@ -185,27 +181,29 @@
               <td>
                 {{ $attendant->first_surname }}
               </td>
-              <td>
-                @if ($attendant->pivot->approved)
-                  <a
-                    href="{{ route('events.showPdf', [$attendant->id, $event->id]) }}"
-                    title="Ver Certificado">
-                    <i class="fa fa-file-pdf-o"></i>
+              @if (Auth::user()->admin)
+                <td>
+                  @if ($attendant->pivot->approved)
+                    <a
+                      href="{{ route('events.showPdf', [$attendant->id, $event->id]) }}"
+                      title="Ver Certificado">
+                      <i class="fa fa-file-pdf-o"></i>
+                    </a>
+                  @else
+                    <a
+                      href="{{ route('events.approveAttendant', [$attendant->id, $event->id]) }}"
+                      title="Aprobar">
+                      <i class="fa fa-check"></i>
+                    </a>
+                  @endif
+                  <a href="#" title="Eliminar" class="attendant-action-delete"
+                     data-id="{{ $attendant->id }}">
+                    <i class="fa fa-times text-danger"></i>
                   </a>
-                @else
-                  <a
-                    href="{{ route('events.approveAttendant', [$attendant->id, $event->id]) }}"
-                    title="Aprobar">
-                    <i class="fa fa-check"></i>
-                  </a>
-                @endif
-                <a href="#" title="Eliminar" class="attendant-action-delete"
-                   data-id="{{ $attendant->id }}">
-                  <i class="fa fa-times text-danger"></i>
-                </a>
-                {!! Form::open(['route' => ['events.destroyAttendant', $attendant->id, $event->id], 'method' => 'DELETE', 'id' => "attendant-delete-$attendant->id"]) !!}
-                {!! Form::close() !!}
-              </td>
+                  {!! Form::open(['route' => ['events.destroyAttendant', $attendant->id, $event->id], 'method' => 'DELETE', 'id' => "attendant-delete-$attendant->id"]) !!}
+                  {!! Form::close() !!}
+                </td>
+              @endif
             </tr>
           @endforeach
           </tbody>
