@@ -106,6 +106,14 @@ class InstitutesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = Institute::findOrFail($id);
+
+        $result = $this->destroyPrototype($title, 'delete', 'Instituto');
+
+        if ($result) {
+            return Redirect::route('institutes.index');
+        }
+
+        return Redirect::route('institutes.show', $id);
     }
 }
