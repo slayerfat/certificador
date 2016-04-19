@@ -33,13 +33,13 @@
           <th data-field="resource" data-sortable="true" data-switchable="true">
             Id
           </th>
-          <th data-field="email" data-sortable="true" data-switchable="true">
+          <th data-field="desc" data-sortable="true" data-switchable="true">
             Descripción
           </th>
-          <th data-field="admin" data-sortable="true" data-switchable="true">
+          <th data-field="professors" data-sortable="true" data-switchable="true">
             Total Profesores
           </th>
-          <th data-field="admin" data-sortable="true" data-switchable="true">
+          <th data-field="personalDetails" data-sortable="true" data-switchable="true">
             Total Usuarios
           </th>
           </thead>
