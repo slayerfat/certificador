@@ -8,9 +8,11 @@
 @section('content')
   <div class="container">
     <h1>Institutos en el sistema</h1>
-    <a href="{{ route('institutes.create') }}" class="btn btn-default">
-      <i class="fa fa-btn fa-plus"></i>Crear Instituto
-    </a>
+    @if (Auth::user()->admin)
+      <a href="{{ route('institutes.create') }}" class="btn btn-default">
+        <i class="fa fa-btn fa-plus"></i>Crear Instituto
+      </a>
+    @endif
     <hr/>
     <div class="row">
       <div class="col-sm-12">
@@ -33,11 +35,14 @@
           <th data-field="resource" data-sortable="true" data-switchable="true">
             Id
           </th>
-          <th data-field="email" data-sortable="true" data-switchable="true">
+          <th data-field="desc" data-sortable="true" data-switchable="true">
             Descripción
           </th>
-          <th data-field="admin" data-sortable="true" data-switchable="true">
+          <th data-field="professors" data-sortable="true" data-switchable="true">
             Total Profesores
+          </th>
+          <th data-field="events" data-sortable="true" data-switchable="true">
+            Total Eventos
           </th>
           </thead>
           <tbody>
@@ -52,6 +57,9 @@
               </td>
               <td>
                 {{ $institute->professors->count() }}
+              </td>
+              <td>
+                {{ $institute->events->count() }}
               </td>
             </tr>
           @endforeach

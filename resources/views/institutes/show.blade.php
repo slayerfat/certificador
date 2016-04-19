@@ -32,33 +32,39 @@
             {{ $institute->leader()->pivot->position }}
           </h2>
 
-          {!!
-          link_to_route(
-            'institutesProfessors.createLeadFromInstToProf',
-            'Cambiar Líder de la institución',
-            $institute->id,
-            ['class' => 'btn btn-default']
-          )
-          !!}
+            @if (Auth::user()->admin)
+              {!!
+              link_to_route(
+                'institutesProfessors.createLeadFromInstToProf',
+                'Cambiar Líder de la institución',
+                $institute->id,
+                ['class' => 'btn btn-default']
+              )
+              !!}
+            @endif
         @else
-          {!!
-          link_to_route(
-            'institutesProfessors.createLeadFromInstToProf',
-            'Asignar Líder de la institución',
-            $institute->id,
-            ['class' => 'btn btn-default']
-          )
-          !!}
+            @if (Auth::user()->admin)
+              {!!
+              link_to_route(
+                'institutesProfessors.createLeadFromInstToProf',
+                'Asignar Líder de la institución',
+                $institute->id,
+                ['class' => 'btn btn-default']
+              )
+              !!}
+            @endif
         @endif
 
-        {!!
-          link_to_route(
-            'institutesProfessors.createNoLeadFromInstToProf',
-            'Añadir profesor a la institución',
-            $institute->id,
-            ['class' => 'btn btn-default']
-          )
-          !!}
+          @if (Auth::user()->admin)
+            {!!
+            link_to_route(
+              'institutesProfessors.createNoLeadFromInstToProf',
+              'Añadir profesor a la institución',
+              $institute->id,
+              ['class' => 'btn btn-default']
+            )
+            !!}
+          @endif
       </div>
     </div>
 
@@ -99,10 +105,12 @@
               data-switchable="false">
             Título
           </th>
-          <th data-field="actions" data-sortable="false"
-              data-switchable="true">
-            Acciones
-          </th>
+          @if (Auth::user()->admin)
+            <th data-field="actions" data-sortable="false"
+                data-switchable="true">
+              Acciones
+            </th>
+          @endif
           </thead>
           <tbody>
           @foreach ($institute->professors as $professor)
@@ -113,13 +121,63 @@
               <td>{{ $professor->personalDetails->first_name }}</td>
               <td>{{ $professor->personalDetails->first_surname }}</td>
               <td>{{ $professor->title->desc }}</td>
+              @if (Auth::user()->admin)
+                <td>
+                  <a href="#" title="Eliminar" class="professor-action-delete"
+                     data-id="{{ $professor->id }}">
+                    <i class="fa fa-times text-danger"></i>
+                  </a>
+                  {!! Form::open(['route' => ['institutesProfessors.destroyProfInst', $professor->id, $institute->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
+                  {!! Form::close() !!}
+                </td>
+              @endif
+            </tr>
+          @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>Eventos relacionados</h2>
+        <table
+          id="tabla"
+          data-toggle="table"
+          data-search="true"
+          data-pagination="true"
+          data-page-list="[10, 25, 50, 100]"
+          data-show-toggle="true"
+          data-show-columns="true"
+          data-click-to-select="true"
+          data-maintain-selected="true"
+          data-sort-name="first_name"
+        >
+          <thead>
+          <th data-field="name" data-sortable="true" data-switchable="true">
+            Nombre
+          </th>
+          <th data-field="hours" data-sortable="true" data-switchable="true">
+            Horas
+          </th>
+          <th data-field="date" data-sortable="true" data-switchable="true">
+            Fecha
+          </th>
+          </thead>
+          <tbody>
+          @foreach ($institute->events as $event)
+            <tr>
               <td>
-                <a href="#" title="Eliminar" class="professor-action-delete"
-                   data-id="{{ $professor->id }}">
-                  <i class="fa fa-times text-danger"></i>
-                </a>
-                {!! Form::open(['route' => ['institutesProfessors.destroyProfInst', $professor->id, $institute->id], 'method' => 'DELETE', 'id' => "professor-delete-$professor->id"]) !!}
-                {!! Form::close() !!}
+                {{ link_to_route('events.show', $event->name, $event->id) }}
+              </td>
+              <td>
+                {{ $event->hours }}
+              </td>
+              <td>
+                {{ Date::parse($event->date)->format('l j F \d\e Y') }}.
+                {{ Date::parse($event->date)->diffForHumans() }}.
               </td>
             </tr>
           @endforeach

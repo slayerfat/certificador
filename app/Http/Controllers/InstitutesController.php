@@ -18,7 +18,7 @@ class InstitutesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('auth.notAdmin');
+        $this->middleware('auth.notAdmin', ['except' => ['index', 'show']]);
     }
 
     /**
