@@ -29,7 +29,7 @@
 <div class="form-group">
   {!! Form::label('ci', 'Cédula de identidad:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::text('ci', null, ['class' => 'form-control']) !!}
+    {!! Form::text('ci', null, ['class' => 'form-control', 'placeholder' => 'Sin puntos, guiones, solo números.']) !!}
   </div>
 </div>
 
@@ -48,12 +48,12 @@
 <div class="form-group">
   {!! Form::label('phone', 'Teléfono:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-4">
-    {!! Form::input('tel', 'phone', null, ['class' => 'form-control', 'pattern' => '[0-9]*']) !!}
+    {!! Form::input('tel', 'phone', null, ['class' => 'form-control', 'pattern' => '[0-9]*', 'placeholder' => 'Sin puntos, guiones, solo números.']) !!}
   </div>
 
   {!! Form::label('cellphone', 'Teléfono celular:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-4">
-    {!! Form::input('tel', 'cellphone', null, ['class' => 'form-control', 'pattern' => '[0-9]*']) !!}
+    {!! Form::input('tel', 'cellphone', null, ['class' => 'form-control', 'pattern' => '[0-9]*', 'placeholder' => 'Sin puntos, guiones, solo números.']) !!}
   </div>
 </div>
 

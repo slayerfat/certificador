@@ -1,7 +1,7 @@
 <div class="form-group">
   {!! Form::label('desc', 'Descripción:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::text('desc', null, ['class' => 'form-control']) !!}
+    {!! Form::text('desc', null, ['class' => 'form-control', 'placeholder' => 'Descripción textual, debe ser única en el sistema.']) !!}
   </div>
 </div>
 

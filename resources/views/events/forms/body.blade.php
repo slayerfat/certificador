@@ -1,14 +1,14 @@
 <div class="form-group">
   {!! Form::label('name', 'Nombre:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'nombre o designación del evento.']) !!}
   </div>
 </div>
 
 <div class="form-group">
   {!! Form::label('info', 'Información adicional:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::text('info', null, ['class' => 'form-control']) !!}
+    {!! Form::text('info', null, ['class' => 'form-control', 'placeholder' => 'Esta información saldrá reflejada como sub-títulos o elementos complementarios en los certificados.']) !!}
   </div>
 </div>
 
@@ -22,26 +22,26 @@
 <div class="form-group">
   {!! Form::label('hours', 'Horas:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-4">
-    {!! Form::input('number', 'hours', null, ['class' => 'form-control']) !!}
+    {!! Form::input('number', 'hours', null, ['class' => 'form-control', 'placeholder' => 'Tiempo de duración del evento.']) !!}
   </div>
 
   {!! Form::label('date', 'Fecha:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-4">
-    {!! Form::input('text', 'date', null, ['class' => 'form-control', 'data-date-format' => 'yyyy-mm-dd']) !!}
+    {!! Form::input('text', 'date', null, ['class' => 'form-control', 'data-date-format' => 'yyyy-mm-dd', 'placeholder' => 'Saldrá en los certificados.']) !!}
   </div>
 </div>
 
 <div class="form-group">
   {!! Form::label('location', 'Locación:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::text('location', null, ['class' => 'form-control']) !!}
+    {!! Form::text('location', null, ['class' => 'form-control', 'placeholder' => 'Lugar físico en donde se realizara el evento, esta información saldrá reflejada en los certificados.']) !!}
   </div>
 </div>
 
 <div class="form-group">
   {!! Form::label('content', 'Contenido:', ['class' => 'col-md-2 control-label']) !!}
   <div class="col-md-10">
-    {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
+    {!! Form::textarea('content', null, ['class' => 'form-control', 'rows' => 20, 'placeholder' => 'Este contenido saldrá reflejado en la parte posterior de TODOS los certificados, no es necesario poner títulos o sub-títulos (nombre del evento, lugar, horas, etc).']) !!}
   </div>
 </div>
 
