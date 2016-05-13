@@ -13,16 +13,12 @@ class TitleTableSeeder extends Seeder
         $this->command->comment('Empezando ' . __CLASS__);
 
         $titles = [
-            'Licda.',
-            'Dr.',
-            'Dra.',
-            'Ing.',
+            ['desc' => 'Licda.'],
+            ['desc' => 'Dr.'],
+            ['desc' => 'Dra.'],
+            ['desc' => 'Ing.'],
         ];
 
-        foreach ($titles as $title) {
-            Title::create([
-                'desc' => $title,
-            ]);
-        }
+        Title::insert($titles);
     }
 }

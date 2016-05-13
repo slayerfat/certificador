@@ -10,11 +10,11 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User;
-        $user->name = env('USER_NAME');
-        $user->email = env('USER_EMAIL');
+        $user           = new User;
+        $user->name     = env('USER_NAME');
+        $user->email    = env('USER_EMAIL');
         $user->password = bcrypt(env('USER_PW'));
-        $user->admin = true;
+        $user->admin    = true;
 
         $user->save();
     }
