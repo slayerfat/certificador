@@ -3,7 +3,7 @@
 En desarrollo.
 
 ### KanBan
-[Ver KanBan](https://huboard.com/slayerfat/jornadas-miniapp/)
+[Ver KanBan](https://huboard.com/slayerfat/certificador/)
 
 ### License
 

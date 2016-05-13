@@ -1,6 +1,6 @@
 <footer class="footer-center">
   <p class="footer-centered-text footer-jumbo">
-    Jornadas-app
+    Certificador
   </p>
 
   <p class="footer-centered-text footer-authors">
@@ -14,7 +14,7 @@
   </p>
 
   <p class="text-center">
-    <a href="https://github.com/slayerfat/jornadas-miniapp"
+    <a href="https://github.com/slayerfat/certificador"
        data-toggle="tooltip"
        title="Ver código fuente"
     >

@@ -13,7 +13,7 @@
 
       <!-- Branding Image -->
       <a class="navbar-brand" href="{{ url('/') }}">
-        Jornadas mini-app {{ env('APP_VER', null) }}
+        Certificador {{ env('APP_VER', null) }}
       </a>
     </div>
 

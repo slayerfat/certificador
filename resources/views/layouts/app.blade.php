@@ -30,7 +30,7 @@ Alejandro Granadillo slayerfat@gmail.com.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Alejandro Granadillo">
 
-  <title>Mini-app Jornadas</title>
+  <title>Certificador</title>
 
   <!-- Styles -->
   <link href="{{ elixir('css/app.css') }}" rel="stylesheet">
