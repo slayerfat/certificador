@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateTitlesTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateTitlesTable extends Migration
     {
         Schema::create('titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('desc');
+            $table->string('desc')->unique();
             $table->timestamps();
         });
     }
