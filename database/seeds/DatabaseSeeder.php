@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserTableSeeder::class);
         $this->call(TitleTableSeeder::class);
-        $this->call(EventTableSeeder::class);
+
+        if (app()->environment() == 'local') {
+            $this->call(EventTableSeeder::class);
+        }
     }
 }
