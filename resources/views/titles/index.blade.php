@@ -30,7 +30,7 @@
           <th data-field="operate" data-formatter="operateFormatter"
               data-events="operateEvents">Ver
           </th>
-          <th data-field="resource" data-sortable="true" data-switchable="true">
+          <th data-field="resource" data-sortable="true" data-switchable="true" data-visible="false">
             Id
           </th>
           <th data-field="desc" data-sortable="true" data-switchable="true">
@@ -51,7 +51,7 @@
                 {{ $title->id }}
               </td>
               <td>
-                {{ $title->desc }}
+                {!! link_to_route('titles.show', $title->desc, $title->id) !!}
               </td>
               <td>
                 {{ $title->professors->count() }}

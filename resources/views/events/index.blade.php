@@ -38,7 +38,7 @@
           <th data-field="operate" data-formatter="operateFormatter"
               data-events="operateEvents">Ver
           </th>
-          <th data-field="resource" data-sortable="true" data-switchable="true">
+          <th data-field="resource" data-sortable="true" data-switchable="true" data-visible="false">
             Id
           </th>
           <th data-field="name" data-sortable="true" data-switchable="true">
@@ -59,7 +59,7 @@
                 {{ $event->id }}
               </td>
               <td>
-                {{ $event->name }}
+                {!! link_to_route('events.show', $event->name, $event->id) !!}
               </td>
               <td>
                 {{ $event->hours }}

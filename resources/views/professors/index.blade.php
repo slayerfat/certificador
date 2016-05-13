@@ -56,10 +56,12 @@
                 {{ $professor->personalDetails->user->name }}
               </td>
               <td>
-                {{ $professor->personalDetails->user->email }}
+                <a href="mailto:{{ $professor->personalDetails->user->email }}">
+                  {{ $professor->personalDetails->user->email }}
+                </a>
               </td>
               <td>
-                {{ $professor->position }}
+                {{ $professor->position or '-' }}
               </td>
               <td>
                 {{ $professor->personalDetails->ci }}

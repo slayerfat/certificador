@@ -66,7 +66,7 @@
                 {{ $user->name }}
               </td>
               <td>
-                {{ $user->email }}
+                <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
               </td>
               <td>
                 {{ $user->admin ? 'Si' : 'No' }}
