@@ -15,7 +15,7 @@ class CreatePersonalDetailsTable extends Migration
         Schema::create('personal_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('title_id');
             $table->foreign('title_id')->references('id')->on('titles');
             $table->enum('sex', ['m', 'f']);

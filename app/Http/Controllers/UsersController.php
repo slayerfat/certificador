@@ -136,6 +136,13 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var User $user */
+        $user = User::findOrFail($id);
+
+        if ($this->destroyPrototype($user, 'delete', 'Usuario', 'Eventos')) {
+            return Redirect::route('users.index');
+        }
+
+        return Redirect::route('users.show', $id);
     }
 }
