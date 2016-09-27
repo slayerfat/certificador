@@ -84,7 +84,7 @@ class UsersController extends Controller
             $user = User::findOrFail($id);
         }
 
-        $user->load('personalDetails', 'personalDetails.professor');
+        $user->load('personalDetails', 'personalDetails.professor', 'personalDetails.events');
 
         return View::make('users.show', compact('user', 'phoneParser'));
     }
