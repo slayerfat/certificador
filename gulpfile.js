@@ -11,7 +11,8 @@ var paths = {
     'wysihtml5': './node_modules/bootstrap3-wysihtml5-bower/'
 };
 
-elixir(function (mix) {
+elixir(function (mix)
+{
     mix.sass('app.sass')
         .sass('pdf.sass')
         .copy(paths.bootstrap + 'fonts/bootstrap/**', paths.public + '/fonts')
@@ -51,6 +52,6 @@ elixir(function (mix) {
             'js/all.js'
         ])
         .browserSync({
-            proxy: 'jornadas.app'
+            proxy: 'certificador.app'
         });
 });

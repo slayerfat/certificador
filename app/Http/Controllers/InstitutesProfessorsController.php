@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Requests\InstituteLeadForProfessorRequest;
 use App\Http\Requests\ProfessorLeadsForInstituteRequest;
 use App\Institute;
@@ -28,7 +27,7 @@ class InstitutesProfessorsController extends Controller
      * Añade un instituto a un profesor como lider del mismo.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createLeadFromProfessorToInstitute($id)
     {
@@ -56,7 +55,7 @@ class InstitutesProfessorsController extends Controller
      * Añade un instituto a un profesor como lider del mismo.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createNoLeadFromProfessorToInstitute($id)
     {
@@ -83,7 +82,7 @@ class InstitutesProfessorsController extends Controller
      * Añade un profesor en un instituto como lider del mismo.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createLeadFromInstituteToProfessor($id)
     {
@@ -118,7 +117,7 @@ class InstitutesProfessorsController extends Controller
      * Añade un profesor en un instituto como lider del mismo.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createNoLeadFromInstituteToProfessor($id)
     {

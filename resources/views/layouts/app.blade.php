@@ -38,6 +38,9 @@ Alejandro Granadillo slayerfat@gmail.com.
   <!-- Yielded -->
   @yield('css')
 
+  <!-- Stack -->
+  @stack('css')
+
   <style>
     .fa-btn {
       margin-right: 6px;
@@ -59,5 +62,8 @@ Alejandro Granadillo slayerfat@gmail.com.
 
 <!-- Yielded -->
 @yield('js')
+
+<!-- Stack -->
+@stack('js')
 </body>
 </html>

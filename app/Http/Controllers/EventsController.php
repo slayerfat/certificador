@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Event;
-use App\Http\Requests;
 use App\Http\Requests\EventAttendantRequest;
 use App\Http\Requests\EventProfessorRequest;
 use App\Http\Requests\EventRequest;
@@ -12,6 +11,7 @@ use App\Institute;
 use App\PersonalDetail;
 use App\Professor;
 use Auth;
+use Carbon\Carbon;
 use Flash;
 use Redirect;
 use View;
@@ -34,7 +34,7 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class EventsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create()
     {
@@ -60,7 +60,7 @@ class EventsController extends Controller
      *
      * @param \App\Http\Requests\EventRequest $request
      * @param \App\Event $event
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function store(EventRequest $request, Event $event)
     {
@@ -76,7 +76,7 @@ class EventsController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function show($id)
     {
@@ -89,7 +89,7 @@ class EventsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit($id)
     {
@@ -107,7 +107,7 @@ class EventsController extends Controller
      *
      * @param \App\Http\Requests\EventRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function update(EventRequest $request, $id)
     {
@@ -122,7 +122,7 @@ class EventsController extends Controller
      * Genera el formulario para insertar profesores al evento.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAttendants($id)
     {
@@ -158,7 +158,7 @@ class EventsController extends Controller
      * Genera el formulario para insertar profesores al evento.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAttendantFromSelf($id)
     {
@@ -188,7 +188,7 @@ class EventsController extends Controller
      *
      * @param int $id
      * @param \App\Http\Requests\EventAttendantRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function storeAttendants($id, EventAttendantRequest $request)
     {
@@ -208,7 +208,7 @@ class EventsController extends Controller
      *
      * @param int $attendantId
      * @param int $eventId
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function approveAttendant($attendantId, $eventId)
     {
@@ -237,7 +237,7 @@ class EventsController extends Controller
      * Genera el formulario para insertar profesores al evento.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createProfessors($id)
     {
@@ -274,7 +274,7 @@ class EventsController extends Controller
      *
      * @param int $id
      * @param \App\Http\Requests\EventProfessorRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function storeProfessors($id, EventProfessorRequest $request)
     {
@@ -330,7 +330,7 @@ class EventsController extends Controller
      *
      * @param int $attendantId
      * @param int $eventId
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showPdf($attendantId, $eventId)
     {
@@ -386,10 +386,23 @@ class EventsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function destroy($id)
     {
-        //
+        /** @var Event $event */
+        $event = Event::findOrFail($id);
+
+        if ($event->date < Carbon::now()) {
+            Flash::error('Este evento ya ocurrió, no puede ser eliminado.');
+
+            return Redirect::route('events.show', $id);
+        }
+
+        if ($this->destroyPrototype($event, 'delete', 'Evento', 'Involucrados')) {
+            return Redirect::route('events.index');
+        }
+
+        return Redirect::route('events.show', $id);
     }
 }
