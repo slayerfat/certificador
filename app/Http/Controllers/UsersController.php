@@ -62,6 +62,7 @@ class UsersController extends Controller
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
             'password' => bcrypt($request->input('password')),
+            'admin'    => $request->input('admin') ? true : false,
         ]);
 
         Flash::success('Usuario creado correctamente.');
@@ -118,12 +119,9 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
-        if (!is_null($request->input('admin'))) {
-            $user->admin = true;
-        }
-
         $user->name  = $request->input('name');
         $user->email = $request->input('email');
+        $user->admin = $request->input('admin') ? true : false;
 
         $user->save();
 
