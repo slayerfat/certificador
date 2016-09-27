@@ -118,6 +118,10 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
+        if (!is_null($request->input('admin'))) {
+            $user->admin = true;
+        }
+
         $user->name  = $request->input('name');
         $user->email = $request->input('email');
 
