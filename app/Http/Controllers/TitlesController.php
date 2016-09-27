@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Requests\TitleRequest;
 use App\Title;
 use Redirect;
@@ -24,7 +23,7 @@ class TitlesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
@@ -36,7 +35,7 @@ class TitlesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create()
     {
@@ -47,7 +46,7 @@ class TitlesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \App\Http\Requests\TitleRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function store(TitleRequest $request)
     {
@@ -60,7 +59,7 @@ class TitlesController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function show($id)
     {
@@ -77,7 +76,7 @@ class TitlesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit($id)
     {
@@ -91,7 +90,7 @@ class TitlesController extends Controller
      *
      * @param \App\Http\Requests\TitleRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function update(TitleRequest $request, $id)
     {
@@ -106,15 +105,13 @@ class TitlesController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function destroy($id)
     {
         $title = Title::findOrFail($id);
 
-        $result = $this->destroyPrototype($title, 'delete', 'Titulo Descriptivo', 'Usuarios');
-
-        if ($result) {
+        if ($this->destroyPrototype($title, 'delete', 'Titulo Descriptivo', 'Usuarios')) {
             return Redirect::route('titles.index');
         }
 
