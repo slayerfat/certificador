@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Requests\ProfessorRequest;
 use App\PersonalDetail;
 use App\Professor;
@@ -27,7 +26,7 @@ class ProfessorsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index()
     {
@@ -40,7 +39,7 @@ class ProfessorsController extends Controller
      * Show the form for creating a new resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create($id)
     {
@@ -66,7 +65,7 @@ class ProfessorsController extends Controller
      * @param int $id
      * @param \App\Http\Requests\ProfessorRequest $request
      * @param \App\Professor $professor
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function store($id, ProfessorRequest $request, Professor $professor)
     {
@@ -89,7 +88,7 @@ class ProfessorsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit($id)
     {
@@ -114,7 +113,7 @@ class ProfessorsController extends Controller
      *
      * @param \App\Http\Requests\ProfessorRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function update(ProfessorRequest $request, $id)
     {
@@ -140,7 +139,7 @@ class ProfessorsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function destroy($id)
     {

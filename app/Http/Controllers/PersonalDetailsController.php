@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Requests\PersonalDetailsRequest;
 use App\PersonalDetail;
 use App\Title;
@@ -27,7 +26,7 @@ class PersonalDetailsController extends Controller
      * Show the form for creating a new resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function create($id)
     {
@@ -43,7 +42,7 @@ class PersonalDetailsController extends Controller
      * @param int $id
      * @param \App\Http\Requests\PersonalDetailsRequest $request
      * @param \App\PersonalDetail $details
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function store(
         $id,
@@ -66,7 +65,7 @@ class PersonalDetailsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function edit($id)
     {
@@ -81,7 +80,7 @@ class PersonalDetailsController extends Controller
      *
      * @param \App\Http\Requests\PersonalDetailsRequest $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function update(PersonalDetailsRequest $request, $id)
     {
