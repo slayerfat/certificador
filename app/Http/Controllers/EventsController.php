@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App;
 use App\Event;
-use App\Http\Requests;
 use App\Http\Requests\EventAttendantRequest;
 use App\Http\Requests\EventProfessorRequest;
 use App\Http\Requests\EventRequest;
@@ -12,6 +11,7 @@ use App\Institute;
 use App\PersonalDetail;
 use App\Professor;
 use Auth;
+use Carbon\Carbon;
 use Flash;
 use Redirect;
 use View;
@@ -390,6 +390,19 @@ class EventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var Event $event */
+        $event = Event::findOrFail($id);
+
+        if ($event->date < Carbon::now()) {
+            Flash::error('Este evento ya ocurrió, no puede ser eliminado.');
+
+            return Redirect::route('events.show', $id);
+        }
+
+        if ($this->destroyPrototype($event, 'delete', 'Evento', 'Involucrados')) {
+            return Redirect::route('events.index');
+        }
+
+        return Redirect::route('events.show', $id);
     }
 }

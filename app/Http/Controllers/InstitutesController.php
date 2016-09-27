@@ -108,9 +108,7 @@ class InstitutesController extends Controller
     {
         $title = Institute::findOrFail($id);
 
-        $result = $this->destroyPrototype($title, 'delete', 'Instituto');
-
-        if ($result) {
+        if ($this->destroyPrototype($title, 'delete', 'Instituto')) {
             return Redirect::route('institutes.index');
         }
 

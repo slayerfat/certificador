@@ -14,7 +14,7 @@ class CreateEventProfessorTable extends Migration
     {
         Schema::create('event_professor', function (Blueprint $table) {
             $table->unsignedInteger('event_id')->nullable();
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->unsignedInteger('professor_id')->nullable();
             $table->foreign('professor_id')->references('id')->on('professors');
             $table->string('position')->nullable();

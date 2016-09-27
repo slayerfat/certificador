@@ -112,9 +112,7 @@ class TitlesController extends Controller
     {
         $title = Title::findOrFail($id);
 
-        $result = $this->destroyPrototype($title, 'delete', 'Titulo Descriptivo', 'Usuarios');
-
-        if ($result) {
+        if ($this->destroyPrototype($title, 'delete', 'Titulo Descriptivo', 'Usuarios')) {
             return Redirect::route('titles.index');
         }
 

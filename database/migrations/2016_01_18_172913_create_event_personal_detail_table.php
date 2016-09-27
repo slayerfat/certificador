@@ -14,7 +14,7 @@ class CreateEventPersonalDetailTable extends Migration
     {
         Schema::create('event_personal_detail', function (Blueprint $table) {
             $table->unsignedInteger('event_id')->nullable();
-            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->unsignedInteger('personal_detail_id')->nullable();
             $table->foreign('personal_detail_id')->references('id')->on('personal_details');
             $table->boolean('approved')->default(false);

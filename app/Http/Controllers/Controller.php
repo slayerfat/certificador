@@ -17,16 +17,19 @@ class Controller extends BaseController
 
     /**
      * Ejecuta un delete en la base de datos por medio de Eloquent.
+     *
      * Cuando se ejecuta el delete tambien genera el flash
      * de sesion relacion a la actividad por medio de
      * los parametros establecidos de recurso e hijo
      * junto al metodo (tal vez borrar parametro).
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param string $method el tipo de metodo a ejecutar (delete|forceDelete)
+     * @param \Illuminate\Database\Eloquent\Model $model El modelo a borrar.
+     * @param string $method El tipo de metodo a ejecutar (delete|forceDelete)
      * @param string $resource El nombre del recurso en texto legible.
      * @param string $child El nombre del recurso hijo en texto legible.
-     * @return bool|\Illuminate\Database\Eloquent\Model
+     *
+     * @return bool Verdadero si pudo ser borrado exitosamente.
+     *
      * @throws \HttpException
      */
     protected function destroyPrototype(
@@ -44,7 +47,7 @@ class Controller extends BaseController
             if ($e instanceof QueryException || $e->getCode() == 23000) {
                 flash()->error("No deben haber {$child} asociados.");
 
-                return $model;
+                return false;
             }
             // si no es una instancia de QueryException,
             // entonces hay problemas inesperados.
