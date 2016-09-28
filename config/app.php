@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +167,7 @@ return [
         Jenssegers\Date\DateServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Felixkiss\UniqueWithValidator\UniqueWithValidatorServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
     ],
 
     /*
@@ -222,5 +223,6 @@ return [
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Date'      => Jenssegers\Date\Date::class,
         'Captcha'   => Mews\Captcha\Facades\Captcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 ];

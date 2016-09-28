@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -69,5 +70,71 @@ class AuthController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function redirectToFacebookProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handleFacebookProviderCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        dd($user);
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function redirectToTwitterProvider()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handleTwitterProviderCallback()
+    {
+        $user = Socialite::driver('twitter')->user();
+
+        dd($user);
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function redirectToGoogleProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function handleGoogleProviderCallback()
+    {
+        $user = Socialite::driver('google')->user();
+
+        dd($user);
     }
 }
