@@ -20,7 +20,8 @@
     "laracasts/flash": "^1.3",
     "jenssegers/date": "^3.1",
     "mews/captcha": "^2.1",
-    "felixkiss/uniquewith-validator": "2.*"
+    "felixkiss/uniquewith-validator": "2.*",
+    "slayerfat/vzla-phone-parser": "^1.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
