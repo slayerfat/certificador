@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
+use Redirect;
 use Socialite;
 use Validator;
+use Faker\Factory;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Laravel\Socialite\Contracts\User as UserContract;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -89,9 +93,7 @@ class AuthController extends Controller
      */
     public function handleFacebookProviderCallback()
     {
-        $user = Socialite::driver('facebook')->user();
-
-        dd($user);
+        return $this->handleOAuthProviderCallback('facebook');
     }
 
     /**
@@ -111,9 +113,7 @@ class AuthController extends Controller
      */
     public function handleTwitterProviderCallback()
     {
-        $user = Socialite::driver('twitter')->user();
-
-        dd($user);
+        return $this->handleOAuthProviderCallback('twitter');
     }
 
     /**
@@ -133,8 +133,49 @@ class AuthController extends Controller
      */
     public function handleGoogleProviderCallback()
     {
-        $user = Socialite::driver('google')->user();
+        return $this->handleOAuthProviderCallback('google');
+    }
 
-        dd($user);
+    /**
+     * Gets the user model according to the user contract given.
+     *
+     * @param UserContract $user The user object from the oauth event.
+     *
+     * @return \App\User The user model from the database.
+     */
+    private function getUserModel(UserContract $user)
+    {
+        $faker = Factory::create();
+
+        $model = User::whereEmail($user->getEmail())->first();
+
+        if (!$model) {
+            $model           = new User();
+            $model->name     = $user->getName();
+            $model->email    = $user->getEmail();
+            $model->password = bcrypt($faker->words(5, true));
+            $model->admin    = false;
+
+            $model->save();
+        }
+
+        return $model;
+    }
+
+    /**
+     * Handles the different callbacks from the Socialite drivers.
+     *
+     * @param string $driver The string with the drivers name.
+     * @param string $redirect The route to redirect to.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    private function handleOAuthProviderCallback($driver, $redirect = 'home.index')
+    {
+        $user = Socialite::driver($driver)->user();
+
+        Auth::login($this->getUserModel($user), true);
+
+        return Redirect::route($redirect);
     }
 }
