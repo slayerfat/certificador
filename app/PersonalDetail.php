@@ -94,6 +94,54 @@ class PersonalDetail extends Model
     }
 
     /**
+     * Set the user's first name.
+     *
+     * @param  string $value
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $value = strtolower($value);
+
+        $this->attributes['first_name'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user's last name.
+     *
+     * @param  string $value
+     */
+    public function setLastNameAttribute($value)
+    {
+        $value = strtolower($value);
+
+        $this->attributes['last_name'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user's first surname.
+     *
+     * @param  string $value
+     */
+    public function setFirstSurnameAttribute($value)
+    {
+        $value = strtolower($value);
+
+        $this->attributes['first_surname'] = ucfirst($value);
+    }
+
+    /**
+     * Set the user's last surname.
+     *
+     * @param  string $value
+     */
+    public function setLastSurnameAttribute($value)
+    {
+        $value = strtolower($value);
+
+        $this->attributes['last_surname'] = ucfirst($value);
+    }
+
+    /**
      * Nos interesa obtener la fecha sin las horas y minutos.
      *
      * @param $value
