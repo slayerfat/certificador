@@ -23,16 +23,18 @@
         <li><a href="{{ route('home.index') }}">Inicio</a></li>
       </ul>
 
-      <!-- Eventos/Jornadas/Cursos -->
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="{{ route('events.index') }}">
-            <i class="fa fa-btn fa-briefcase"></i>Eventos
-          </a>
-        </li>
-      </ul>
+      @if(!Auth::guest())
+        <!-- Eventos/Jornadas/Cursos -->
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{{ route('events.index') }}">
+              <i class="fa fa-btn fa-briefcase"></i>Eventos
+            </a>
+          </li>
+        </ul>
+      @endif
 
-      <!-- Mant -->
+    <!-- Mant -->
       @if(Auth::user() && Auth::user()->admin)
         <ul class="nav navbar-nav">
           <li class="dropdown">
@@ -75,9 +77,9 @@
             </ul>
           </li>
         </ul>
-      @endif
+    @endif
 
-      <!-- Right Side Of Navbar -->
+    <!-- Right Side Of Navbar -->
       <ul class="nav navbar-nav navbar-right">
         <!-- Authentication Links -->
         @if (Auth::guest())
