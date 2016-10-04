@@ -4,6 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
+        @include('layouts.user.no-personal-details')
+
         @if (Auth::user()->admin)
           @include('layouts.admins.edit-delete-buttons', [
             'resource' => 'events',

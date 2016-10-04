@@ -4,6 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
+        @include('layouts.user.no-personal-details')
+
         <div class="panel panel-default">
           <div class="panel-heading">Información de eventos</div>
           <div class="panel-body">
