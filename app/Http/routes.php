@@ -396,7 +396,7 @@ Route::group(['middleware' => ['web']], function () {
     );
 
     Route::get('/6d719fde105710c7f1aa9834a726d8a4.txt', function () {
-        Storage::disk('local')->put('6d719fde105710c7f1aa9834a726d8a4.txt', '!');
+        Storage::disk('local')->put('6d719fde105710c7f1aa9834a726d8a4.txt', '');
 
         return Storage::disk('local')->get('6d719fde105710c7f1aa9834a726d8a4.txt');
     });
