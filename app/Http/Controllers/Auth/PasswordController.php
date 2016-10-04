@@ -21,6 +21,13 @@ class PasswordController extends Controller
     use ResetsPasswords;
 
     /**
+     * Changes de subject of the email to be send.
+     *
+     * @var string
+     */
+    public $subject = 'Certificador: Su enlace para cambio de clave';
+
+    /**
      * Create a new password controller instance.
      *
      * @return void
