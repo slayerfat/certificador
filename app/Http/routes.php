@@ -394,4 +394,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'InstitutesProfessorsController@destroyProfessorInstitute',
         ]
     );
+
+    Route::get('/6d719fde105710c7f1aa9834a726d8a4.txt', function () {
+        Storage::disk('local')->put('6d719fde105710c7f1aa9834a726d8a4.txt', '!');
+
+        return Storage::disk('local')->get('6d719fde105710c7f1aa9834a726d8a4.txt');
+    });
 });
