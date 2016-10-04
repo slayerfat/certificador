@@ -64,6 +64,10 @@
                   <a class="btn btn-link" href="{{ url('/password/reset') }}">
                     Olvido su Contraseña?
                   </a>
+
+                  <hr>
+
+                  @include('auth.oauth-buttons', ['verb' => 'Entrar'])
                 </div>
               </div>
             </form>
