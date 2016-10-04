@@ -21,6 +21,7 @@
 * **frontend:** event link in navbar is disabled on guest browsing ([f6ff548](https://github.com/slayerfat/certificador/commit/f6ff548))
 * **frontend:** view related user events. ([ba07393](https://github.com/slayerfat/certificador/commit/ba07393))
 * **git:** add initial use of conventional changelog ([8ec67b3](https://github.com/slayerfat/certificador/commit/8ec67b3))
+* add bare user list in pdf ([95017d2](https://github.com/slayerfat/certificador/commit/95017d2))
 
 
 

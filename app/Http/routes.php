@@ -315,6 +315,12 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'events.showPdf', 'uses' => 'EventsController@showPdf']
     );
 
+    // PDF de listado de usuarios
+    Route::get(
+        '/eventos/usuarios/pdf/{event}',
+        ['as' => 'events.userListPdf', 'uses' => 'EventsController@userListPdf']
+    );
+
     // InstitutesProfessors
     // Desde instituto a profesor (LEAD)
     Route::get(
