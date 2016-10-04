@@ -22,10 +22,10 @@
     "mews/captcha": "^2.1",
     "felixkiss/uniquewith-validator": "2.*",
     "slayerfat/vzla-phone-parser": "^1.0",
-    "laravel/socialite": "^2.0"
+    "laravel/socialite": "^2.0",
+    "fzaninotto/faker": "~1.4"
   },
   "require-dev": {
-    "fzaninotto/faker": "~1.4",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4.0",
     "symfony/css-selector": "2.8.*|3.0.*",
