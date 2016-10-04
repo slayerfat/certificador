@@ -22,7 +22,7 @@ class TitleRequest extends Request
     public function rules()
     {
         return [
-            'desc' => 'required|string|max:255',
+            'desc' => 'required|string|max:255|no_uppercase',
         ];
     }
 }

@@ -22,7 +22,7 @@ class InstituteRequest extends Request
     public function rules()
     {
         return [
-            'name' => 'required|string|between:5,250',
+            'name' => 'required|string|between:5,250|no_uppercase',
         ];
     }
 }

@@ -65,6 +65,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * Set the user's first name.
+     *
+     * @param  string  $value
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = strtolower($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\hasOne|\Illuminate\Database\Query\Builder
      */
     public function personalDetails()

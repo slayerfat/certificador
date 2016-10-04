@@ -166,7 +166,7 @@ class InstitutesProfessorsController extends Controller
         /** @var Institute $institute */
         $institute = Institute::findOrFail($id);
         $input     = $request->input('professors');
-        $position  = $request->input('position');
+        $position  = ucfirst($request->input('position'));
         $this->insertProfessor($institute, $input, $position, false);
 
         Flash::success('Profesor asignado correctamente.');
@@ -235,7 +235,7 @@ class InstitutesProfessorsController extends Controller
         /** @var Institute $institute */
         $institute = Institute::findOrFail($id);
         $input     = $request->input('professors');
-        $position  = $request->input('position');
+        $position  = ucfirst($request->input('position'));
         $this->insertProfessor($institute, $input, $position, true);
 
         Flash::success('Profesor asignado correctamente.');
@@ -277,7 +277,7 @@ class InstitutesProfessorsController extends Controller
         $professor = Professor::findOrFail($id)
             ->load('personalDetails', 'personalDetails.user');
         $input     = $request->input('institutes');
-        $position  = $request->input('position');
+        $position  = ucfirst($request->input('position'));
         $this->insertProfessorFromSelf($professor, $input, $position, true);
 
         Flash::success('Profesor asignado correctamente.');
@@ -334,7 +334,7 @@ class InstitutesProfessorsController extends Controller
         $professor = Professor::findOrFail($id)
             ->load('personalDetails', 'personalDetails.user');
         $input     = $request->input('institutes');
-        $position  = $request->input('position');
+        $position  = ucfirst($request->input('position'));
         $this->insertProfessorFromSelf($professor, $input, $position, false);
 
         Flash::success('Profesor asignado correctamente.');
@@ -359,7 +359,7 @@ class InstitutesProfessorsController extends Controller
         /** @var Professor $professor */
         $professor = Professor::findOrFail($id);
         $input     = $request->input('institutes');
-        $position  = $request->input('position');
+        $position  = ucfirst($request->input('position'));
         $this->insertProfessorFromSelf($professor, $input, $position, false);
 
         Flash::success('Profesor asignado correctamente.');

@@ -23,7 +23,7 @@ class InstituteLeadForProfessorRequest extends Request
     {
         return [
             'institutes' => 'required',
-            'position'   => 'string|between:5,250',
+            'position'   => 'string|between:5,250|no_uppercase',
         ];
     }
 }

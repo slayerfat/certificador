@@ -26,8 +26,8 @@ class EventRequest extends Request
             'name'         => $this->getNameRules(),
             'hours'        => 'required|int|min:1',
             'date'         => 'date',
-            'location'     => 'string',
-            'info'         => 'string',
+            'location'     => 'string|no_uppercase',
+            'info'         => 'string|no_uppercase',
         ];
     }
 
@@ -38,13 +38,14 @@ class EventRequest extends Request
      */
     private function getNameRules()
     {
+        $rules = 'required|string|no_uppercase|between:3,250|unique_with:events,date';
+
         switch ($this->method()) {
             case 'PUT':
             case 'PATCH':
-                return 'required|string|between:3,250|unique_with:events,date,'
-                . $this->route('id');
+                return $rules . ',' . $this->route('id');
             default:
-                return 'required|string|between:3,250|unique_with:events,date';
+                return $rules;
         }
     }
 }
