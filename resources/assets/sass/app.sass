@@ -1,3 +1,58 @@
 @import bootstrap
 @import fontAwesome
 @import layout/footer
+
+$FACEBOOK_COLOR: #3B5998
+$TWITTER_COLOR: #55ACEE
+$GOOGLE_COLOR: #DD4B39
+$LINKED_IN_COLOR: #0082CA
+$GITHUB_COLOR: #4183C4
+$PINTEREST_COLOR: #C61118
+$INSTAGRAM_COLOR: #3F729B
+
+@mixin brand-button($color)
+  background-color: $color
+  border-color: darken($color, 20%)
+
+.btn-fb
+  @include brand-button($FACEBOOK_COLOR)
+
+.btn-fb:hover, .btn-fb:active
+  @include brand-button(darken($FACEBOOK_COLOR, 10%))
+
+.btn-tw
+  @include brand-button($TWITTER_COLOR)
+
+.btn-tw:hover, .btn-tw:active
+  @include brand-button(darken($TWITTER_COLOR, 10%))
+
+.btn-g
+  @include brand-button($GOOGLE_COLOR)
+
+.btn-g:hover, .btn-g:active
+  @include brand-button(darken($GOOGLE_COLOR, 10%))
+
+.btn-li
+  @include brand-button($LINKED_IN_COLOR)
+
+.btn-li:hover, .btn-li:active
+  @include brand-button(darken($LINKED_IN_COLOR, 10%))
+
+.btn-git
+  @include brand-button($GITHUB_COLOR)
+
+.btn-git:hover, .btn-git:active
+  @include brand-button(darken($GITHUB_COLOR, 10%))
+
+.btn-pin
+  @include brand-button($PINTEREST_COLOR)
+
+.btn-pin:hover, .btn-pin:active
+  @include brand-button(darken($PINTEREST_COLOR, 10%))
+
+.btn-ins
+  @include brand-button($INSTAGRAM_COLOR)
+
+.btn-ins:hover, .btn-ins:active
+  @include brand-button(darken($INSTAGRAM_COLOR, 10%))
+

@@ -3,6 +3,8 @@
 @section('content')
   <div class="container">
     <div class="row">
+      @include('layouts.user.no-personal-details')
+
       @if (Auth::user()->admin)
         @include('layouts.admins.edit-delete-buttons', [
           'resource' => 'users',

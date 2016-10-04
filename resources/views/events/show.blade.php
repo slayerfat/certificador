@@ -4,12 +4,15 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
+        @include('layouts.user.no-personal-details')
+
         @if (Auth::user()->admin)
           @include('layouts.admins.edit-delete-buttons', [
             'resource' => 'events',
             'id' => $event->id
           ])
-          <a href="{{ route('events.indexPdf', $event->id) }}" class="btn btn-default" id="event-pdf">
+          <a href="{{ route('events.indexPdf', $event->id) }}" class="btn btn-default"
+             id="event-pdf">
             <i class="fa fa-btn fa-file-pdf-o"></i>Generar PDFs
           </a>
         @endif
@@ -127,7 +130,14 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h2>Participantes</h2>
+        <h2>
+          Participantes
+          <a href="{{ route('events.userListPdf', $event->id) }}"
+             class="btn btn-default"
+             id="event-user-list-pdf">
+            <i class="fa fa-btn fa-file-pdf-o"></i>Generar listado de participantes
+          </a>
+        </h2>
         <table
           id="tabla"
           data-toggle="table"
@@ -227,27 +237,34 @@
   </script>
 
   <script>
-    $('document').ready(function () {
-      $('.professor-action-delete').click(function (event) {
+    $('document').ready(function ()
+    {
+      $('.professor-action-delete').click(function (event)
+      {
         event.preventDefault();
         var id = $(this).data('id');
 
-        if (confirm('¿Está seguro que desea eliminar a este Profesor?')) {
+        if (confirm('¿Está seguro que desea eliminar a este Profesor?'))
+        {
           $('#professor-delete-' + id).submit();
         }
       });
 
-      $('.attendant-action-delete').click(function (event) {
+      $('.attendant-action-delete').click(function (event)
+      {
         event.preventDefault();
         var id = $(this).data('id');
 
-        if (confirm('¿Está seguro que desea eliminar a este Participante?')) {
+        if (confirm('¿Está seguro que desea eliminar a este Participante?'))
+        {
           $('#attendant-delete-' + id).submit();
         }
       });
 
-      $('#event-pdf').click(function(event){
-        if(!confirm('Esta acción puede tardar varios minutos, ¿desea continuar?')) {
+      $('#event-pdf').click(function (event)
+      {
+        if (!confirm('Esta acción puede tardar varios minutos, ¿desea continuar?'))
+        {
           event.preventDefault();
         }
       });

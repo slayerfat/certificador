@@ -48,6 +48,17 @@ class Professor extends Model
     ];
 
     /**
+     * Modifica la posicion para que siempre sea mayuscula la primera letra.
+     *
+     * @param $value
+     * @return string
+     */
+    public function setPositionAttribute($value)
+    {
+        return $this->attributes['position'] = ucfirst($value);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|\Illuminate\Database\Query\Builder
      */
     public function personalDetails()

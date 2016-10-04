@@ -6,12 +6,54 @@ Route::group(['middleware' => ['auth']], function () {
     });
 });
 
-Route::get('/view', function () {
-    return view('events.pdf.CUFM');
-});
-
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
+
+    // OAuth
+    Route::get(
+        '/auth/facebook',
+        [
+            'as'   => 'facebook',
+            'uses' => 'Auth\AuthController@redirectToFacebookProvider',
+        ]
+    );
+    Route::get(
+        '/auth/facebook/callback',
+        [
+            'as'   => 'facebook.callback',
+            'uses' => 'Auth\AuthController@handleFacebookProviderCallback',
+        ]
+    );
+
+    Route::get(
+        '/auth/twitter',
+        [
+            'as'   => 'twitter',
+            'uses' => 'Auth\AuthController@redirectToTwitterProvider',
+        ]
+    );
+    Route::get(
+        '/auth/twitter/callback',
+        [
+            'as'   => 'twitter.callback',
+            'uses' => 'Auth\AuthController@handleTwitterProviderCallback',
+        ]
+    );
+
+    Route::get(
+        '/auth/google',
+        [
+            'as'   => 'google',
+            'uses' => 'Auth\AuthController@redirectToGoogleProvider',
+        ]
+    );
+    Route::get(
+        '/auth/google/callback',
+        [
+            'as'   => 'google.callback',
+            'uses' => 'Auth\AuthController@handleGoogleProviderCallback',
+        ]
+    );
 
     Route::get(
         '/home',
@@ -77,26 +119,30 @@ Route::group(['middleware' => ['web']], function () {
     // Personal Details
     Route::get(
         '/datos-personales/crear/{userID}',
-        ['as'   => 'personalDetails.create',
-         'uses' => 'PersonalDetailsController@create',
+        [
+            'as'   => 'personalDetails.create',
+            'uses' => 'PersonalDetailsController@create',
         ]
     );
     Route::post(
         '/datos-personales/{userID}',
-        ['as'   => 'personalDetails.store',
-         'uses' => 'PersonalDetailsController@store',
+        [
+            'as'   => 'personalDetails.store',
+            'uses' => 'PersonalDetailsController@store',
         ]
     );
     Route::get(
         '/datos-personales/{id}/editar',
-        ['as'   => 'personalDetails.edit',
-         'uses' => 'PersonalDetailsController@edit',
+        [
+            'as'   => 'personalDetails.edit',
+            'uses' => 'PersonalDetailsController@edit',
         ]
     );
     Route::patch(
         '/datos-personales/{id}',
-        ['as'   => 'personalDetails.update',
-         'uses' => 'PersonalDetailsController@update',
+        [
+            'as'   => 'personalDetails.update',
+            'uses' => 'PersonalDetailsController@update',
         ]
     );
 
@@ -267,6 +313,12 @@ Route::group(['middleware' => ['web']], function () {
     Route::get(
         '/eventos/pdf/{attendant}/{event}',
         ['as' => 'events.showPdf', 'uses' => 'EventsController@showPdf']
+    );
+
+    // PDF de listado de usuarios
+    Route::get(
+        '/eventos/usuarios/pdf/{event}',
+        ['as' => 'events.userListPdf', 'uses' => 'EventsController@userListPdf']
     );
 
     // InstitutesProfessors

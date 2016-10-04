@@ -360,6 +360,12 @@ class EventsController extends Controller
         return $pdf->stream();
     }
 
+    /**
+     * Genera una serie de PDFs relacionados a un evento.
+     *
+     * @param $eventId
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function indexPdf($eventId)
     {
         /** @var Event $event */
@@ -378,6 +384,27 @@ class EventsController extends Controller
 
         $pdf->loadView('events.pdf.CUFM', compact('attendants', 'event'));
         $pdf->setOrientation('landscape');
+
+        return $pdf->stream();
+    }
+
+    public function userListPdf($eventId)
+    {
+        /** @var Event $event */
+        $event      = Event::findOrFail($eventId);
+        $attendants = $event->attendants()
+                            ->get();
+
+        if ($attendants->isEmpty()) {
+            Flash::error('No hay participantes asignados o aprobados para este evento.');
+
+            return Redirect::back();
+        }
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadView('events.pdf.user-list', compact('attendants', 'event'));
+        $pdf->setOrientation('portrait');
 
         return $pdf->stream();
     }
